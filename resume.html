@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Resume - Your Name</title>
+  <title>Resume - Sumedh Ramakrishna</title>
   <style>
     :root {
       --bg: #ffffff;
@@ -60,7 +60,7 @@
       top: 100%;
       left: 0;
       background-color: var(--bg);
-      min-width: 200px;
+      min-width: 260px;
       border: 1px solid var(--border);
       border-radius: 6px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.08);
@@ -72,6 +72,7 @@
       padding: 8px 16px;
       color: var(--text);
       border-bottom: none;
+      font-size: 0.95rem;
     }
     .dropdown-menu a:hover {
       background-color: #f6f8fa;
@@ -131,58 +132,99 @@
     <div class="dropdown">
       <button class="dropdown-btn">Projects &#9662;</button>
       <div class="dropdown-menu">
-        <a href="project-1.html">Project One Title</a>
-        <a href="project-2.html">Project Two Title</a>
-        <a href="project-3.html">Project Three Title</a>
+        <a href="project-1.html">Master's Thesis (IFLS Panel)</a>
+        <a href="project-2.html">Decision Theory & Predictive Modeling</a>
+        <a href="project-3.html">Regional Asset Valuation (MIDS)</a>
+        <a href="project-4.html">Bachelor's Thesis (NSS Liquidity)</a>
       </div>
     </div>
   </nav>
 
   <h1>Resume</h1>
 
-  <!-- Education Section -->
-  <section id="education">
-    <h2>Education</h2>
-    <div class="item">
-      <div class="item-header">
-        <span>Degree Placeholder 1</span>
-        <span>Dates</span>
-      </div>
-      <div class="item-sub">University Name, Location</div>
-      <p>Key highlights, grades, or thesis details placeholder.</p>
-    </div>
-    <div class="item">
-      <div class="item-header">
-        <span>Degree Placeholder 2</span>
-        <span>Dates</span>
-      </div>
-      <div class="item-sub">University Name, Location</div>
-    </div>
-  </section>
-
-  <!-- Experience Section -->
-  <section id="experience">
-    <h2>Experience</h2>
-    <div class="item">
-      <div class="item-header">
-        <span>Job / Research Title</span>
-        <span>Dates</span>
-      </div>
-      <div class="item-sub">Organization, Location</div>
-      <ul>
-        <li>Responsibility and quantitative achievement bullet point placeholder.</li>
-        <li>Methodology, pipeline, or model developed placeholder.</li>
-      </ul>
-    </div>
-  </section>
-
-  <!-- Skills Section -->
+  <!-- Technical Skills -->
   <section id="skills">
     <h2>Technical Skills</h2>
     <ul>
-      <li><strong>Languages & Databases:</strong> Tool 1, Tool 2, Tool 3</li>
-      <li><strong>Methods:</strong> Method 1, Method 2, Method 3</li>
+      <li><strong>Programming & Databases:</strong> SQL, Python, R, Stata, Git/GitHub, LaTeX, Advanced Excel.</li>
+      <li><strong>Quantitative Methods & Machine Learning:</strong> Supervised/unsupervised learning, regularized regression (LASSO/Ridge), logistic regression, tree-based models (Random Forest, Gradient Boosting), causal inference, panel econometrics, hypothesis testing, portfolio optimization, downside risk metrics (VaR/CVaR), credit risk scoring, factor models.</li>
+      <li><strong>Languages:</strong> English (Native / Bilingual), German (Learning B1), Tamil (Native / Bilingual).</li>
     </ul>
+  </section>
+
+  <!-- Education -->
+  <section id="education">
+    <h2>Education</h2>
+    
+    <div class="item">
+      <div class="item-header">
+        <span>Heidelberg University (Alfred Weber Institute)</span>
+        <span>11/2025</span>
+      </div>
+      <div class="item-sub">M.Sc. Economics (Grade: 2.0 - Good) | Heidelberg, Germany</div>
+    </div>
+
+    <div class="item">
+      <div class="item-header">
+        <span>Shiv Nadar University</span>
+        <span>06/2021</span>
+      </div>
+      <div class="item-sub">B.Sc. (Research) in Economics | Greater Noida, India</div>
+    </div>
+  </section>
+
+  <!-- Experience & Research -->
+  <section id="experience">
+    <h2>Research & Analytical Experience</h2>
+
+    <div class="item">
+      <div class="item-header">
+        <span>Master's Thesis (Grade: 1.8)</span>
+        <span>07/2025 – 11/2025</span>
+      </div>
+      <div class="item-sub">Alfred Weber Institute (Prof. Stefan Klonner) | Heidelberg, Germany</div>
+      <ul>
+        <li>Analyzed household investment behavior and financial commitment decisions using complex microdata panels from the Indonesian Family Life Survey (IFLS).</li>
+        <li>Engineered a quantitative indexing method to structure multi-round longitudinal data, implementing non-linear econometric regressions and causal inference to evaluate household resource allocation under financial constraints.</li>
+        <li>Executed reproducible data-cleaning and transformation pipelines in R and Stata across tens of thousands of survey records.</li>
+      </ul>
+    </div>
+
+    <div class="item">
+      <div class="item-header">
+        <span>Master's Seminar (Decision Theory & Predictive Modeling)</span>
+        <span>04/2024 – 08/2024</span>
+      </div>
+      <div class="item-sub">Alfred Weber Institute (Dr. Sebastian Ebert) | Heidelberg, Germany</div>
+      <ul>
+        <li>Modeled choice behavior and risk-preference shifts across asymmetric risk environments, evaluating predictive accuracy of contextual choice models against standard expected-utility benchmarks.</li>
+        <li>Structured decision trees and non-linear classification models to benchmark risk profiles and identify non-standard decision patterns relevant to credit risk assessment.</li>
+      </ul>
+    </div>
+
+    <div class="item">
+      <div class="item-header">
+        <span>Research Intern</span>
+        <span>05/2021 – 11/2021</span>
+      </div>
+      <div class="item-sub">Madras Inst. of Dev. Studies (Dr. L. Venkatachalam) | Chennai, India</div>
+      <ul>
+        <li>Conducted statistical valuation and cost-benefit estimations for regional ecological assets to support structured policy and public investment allocations.</li>
+        <li>Synthesized multi-source environmental and survey datasets into structured regression models and executive analytical reports.</li>
+      </ul>
+    </div>
+
+    <div class="item">
+      <div class="item-header">
+        <span>Bachelor's Thesis</span>
+        <span>08/2019 – 05/2020</span>
+      </div>
+      <div class="item-sub">Shiv Nadar University (Dr. Arka Roy Chaudhuri) | Greater Noida, India</div>
+      <ul>
+        <li>Investigated macroeconomic liquidity shocks and informal cash circulation anomalies using large-scale National Sample Survey (NSS) expenditure microdata.</li>
+        <li>Identified transient consumption spikes using difference-in-differences and time-series controls, evaluating systemic liquidity shifts.</li>
+      </ul>
+    </div>
   </section>
 
 </body>
