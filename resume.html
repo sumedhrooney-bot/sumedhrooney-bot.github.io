@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Resume - Your Name</title>
+  <style>
+    :root {
+      --bg: #ffffff;
+      --text: #1a1a1a;
+      --muted: #555555;
+      --border: #e1e4e8;
+      --link: #0366d6;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.6;
+      color: var(--text);
+      background-color: var(--bg);
+      max-width: 750px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 12px;
+      margin-bottom: 36px;
+    }
+    nav a, .dropdown-btn {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 1rem;
+      font-weight: 500;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 6px 4px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-family: inherit;
+    }
+    nav a:hover, .dropdown-btn:hover, nav a.active {
+      color: var(--text);
+    }
+    nav a.active {
+      font-weight: 600;
+      border-bottom: 2px solid var(--text);
+    }
+    .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+    .dropdown-menu {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background-color: var(--bg);
+      min-width: 200px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      padding: 8px 0;
+      z-index: 100;
+    }
+    .dropdown-menu a {
+      display: block;
+      padding: 8px 16px;
+      color: var(--text);
+      border-bottom: none;
+    }
+    .dropdown-menu a:hover {
+      background-color: #f6f8fa;
+      color: var(--link);
+    }
+    .dropdown:hover .dropdown-menu {
+      display: block;
+    }
+    h1 {
+      font-size: 1.8rem;
+      margin-bottom: 20px;
+    }
+    section {
+      margin-bottom: 36px;
+    }
+    h2 {
+      font-size: 1.3rem;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 6px;
+      margin-bottom: 16px;
+    }
+    .item {
+      margin-bottom: 20px;
+    }
+    .item-header {
+      display: flex;
+      justify-content: space-between;
+      font-weight: 600;
+    }
+    .item-sub {
+      color: var(--muted);
+      font-size: 0.95rem;
+      margin-bottom: 6px;
+    }
+    ul {
+      margin: 0;
+      padding-left: 20px;
+    }
+    li {
+      margin-bottom: 6px;
+    }
+    a {
+      color: var(--link);
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Navigation -->
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="resume.html" class="active">Resume</a>
+    <div class="dropdown">
+      <button class="dropdown-btn">Projects &#9662;</button>
+      <div class="dropdown-menu">
+        <a href="project-1.html">Project One Title</a>
+        <a href="project-2.html">Project Two Title</a>
+        <a href="project-3.html">Project Three Title</a>
+      </div>
+    </div>
+  </nav>
+
+  <h1>Resume</h1>
+
+  <!-- Education Section -->
+  <section id="education">
+    <h2>Education</h2>
+    <div class="item">
+      <div class="item-header">
+        <span>Degree Placeholder 1</span>
+        <span>Dates</span>
+      </div>
+      <div class="item-sub">University Name, Location</div>
+      <p>Key highlights, grades, or thesis details placeholder.</p>
+    </div>
+    <div class="item">
+      <div class="item-header">
+        <span>Degree Placeholder 2</span>
+        <span>Dates</span>
+      </div>
+      <div class="item-sub">University Name, Location</div>
+    </div>
+  </section>
+
+  <!-- Experience Section -->
+  <section id="experience">
+    <h2>Experience</h2>
+    <div class="item">
+      <div class="item-header">
+        <span>Job / Research Title</span>
+        <span>Dates</span>
+      </div>
+      <div class="item-sub">Organization, Location</div>
+      <ul>
+        <li>Responsibility and quantitative achievement bullet point placeholder.</li>
+        <li>Methodology, pipeline, or model developed placeholder.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Skills Section -->
+  <section id="skills">
+    <h2>Technical Skills</h2>
+    <ul>
+      <li><strong>Languages & Databases:</strong> Tool 1, Tool 2, Tool 3</li>
+      <li><strong>Methods:</strong> Method 1, Method 2, Method 3</li>
+    </ul>
+  </section>
+
+</body>
+</html>
