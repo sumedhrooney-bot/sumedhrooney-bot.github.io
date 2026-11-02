@@ -3,13 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sumedh Ramakrishna - Portfolio</title>
+  <title>Sumedh Ramakrishna</title>
   <style>
     :root {
       --bg: #ffffff;
       --text: #1a1a1a;
       --muted: #555555;
       --border: #e1e4e8;
+      --link: #0366d6;
     }
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
@@ -20,95 +21,154 @@
       margin: 40px auto;
       padding: 0 20px;
     }
-    header {
+
+    /* Top Navigation Bar */
+    nav {
+      display: flex;
+      gap: 20px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 12px;
+      margin-bottom: 36px;
+    }
+    nav button {
+      background: none;
+      border: none;
+      font-size: 1rem;
+      font-weight: 500;
+      color: var(--muted);
+      cursor: pointer;
+      padding: 6px 4px;
+      border-bottom: 2px solid transparent;
+      transition: all 0.2s ease;
+    }
+    nav button:hover {
+      color: var(--text);
+    }
+    nav button.active {
+      color: var(--text);
+      font-weight: 600;
+      border-bottom: 2px solid var(--text);
+    }
+
+    /* Tab Page Visibility */
+    .tab-content {
+      display: none;
+    }
+    .tab-content.active {
+      display: block;
+    }
+
+    /* Home / About Layout */
+    .about-view {
       display: flex;
       align-items: center;
-      gap: 24px;
-      margin-bottom: 40px;
+      gap: 32px;
+      margin-top: 20px;
     }
     .profile-img {
-      width: 140px;
-      height: 140px;
+      width: 160px;
+      height: 160px;
       border-radius: 50%;
       object-fit: cover;
       border: 1px solid var(--border);
+      flex-shrink: 0;
     }
-    .intro h1 {
-      margin: 0 0 8px 0;
-      font-size: 1.8rem;
+    .about-text h1 {
+      margin: 0 0 10px 0;
+      font-size: 2rem;
     }
-    .intro p {
-      margin: 0;
+    .about-text p {
+      margin: 0 0 12px 0;
       color: var(--muted);
-      font-size: 0.98rem;
+      font-size: 1rem;
     }
-    section {
-      margin-bottom: 40px;
-    }
+
+    /* Education & Projects Styling */
     h2 {
-      font-size: 1.3rem;
+      font-size: 1.4rem;
       border-bottom: 1px solid var(--border);
-      padding-bottom: 6px;
-      margin-bottom: 16px;
+      padding-bottom: 8px;
+      margin-bottom: 20px;
     }
     .item {
-      margin-bottom: 18px;
+      margin-bottom: 24px;
     }
     .item-header {
       display: flex;
       justify-content: space-between;
       font-weight: 600;
+      font-size: 1.05rem;
     }
     .item-sub {
       color: var(--muted);
       font-size: 0.95rem;
-      margin-bottom: 6px;
+      margin: 2px 0 8px 0;
     }
     a {
-      color: #0366d6;
+      color: var(--link);
       text-decoration: none;
     }
     a:hover {
       text-decoration: underline;
     }
+
+    @media (max-width: 600px) {
+      .about-view {
+        flex-direction: column;
+        text-align: center;
+      }
+      .item-header {
+        flex-direction: column;
+        gap: 2px;
+      }
+    }
   </style>
 </head>
 <body>
 
-  <!-- Top: Picture & Description -->
-  <header>
-    <img src="profile.jpeg" alt="Sumedh Ramakrishna" class="profile-img">
-    <div class="intro">
-      <h1>Sumedh Ramakrishna</h1>
-      <p>Quantitative Economist specializing in financial risk analytics, econometric modeling, credit decisioning logic, and applied machine learning. Experienced in SQL database extraction, cash-flow and panel data analysis, risk-adjusted portfolio metrics, and statistical underwriting models.</p>
-    </div>
-  </header>
+  <!-- Top Menu Selection -->
+  <nav>
+    <button class="nav-btn active" onclick="showTab('home')">Home</button>
+    <button class="nav-btn" onclick="showTab('education')">Education</button>
+    <button class="nav-btn" onclick="showTab('projects')">Projects</button>
+  </nav>
 
-  <!-- Section: Education -->
-  <section id="education">
+  <!-- View 1: Home (Photo + Intro) -->
+  <div id="home" class="tab-content active">
+    <div class="about-view">
+      <img src="profile.jpeg" alt="Sumedh Ramakrishna" class="profile-img">
+      <div class="about-text">
+        <h1>Sumedh Ramakrishna</h1>
+        <p>Quantitative Economist specializing in financial risk analytics, econometric modeling, credit decisioning logic, and applied machine learning[cite: 4]. Experienced in SQL database extraction, cash-flow and panel data analysis, risk-adjusted portfolio metrics, and statistical underwriting models[cite: 4].</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- View 2: Education -->
+  <div id="education" class="tab-content">
     <h2>Education</h2>
-    
+
     <div class="item">
       <div class="item-header">
         <span>M.Sc. Economics</span>
-        <span>11/2025</span>
+        <span>11/2025</span>[cite: 4]
       </div>
-      <div class="item-sub">Heidelberg University (Alfred Weber Institute), Heidelberg, Germany</div>
-      <p>Grade: 2.0 (Good) | Master's Thesis: <em>Analyzed household investment behavior and financial commitment decisions using complex microdata panels from the Indonesian Family Life Survey (IFLS)</em> (Grade: 1.8)</p>
+      <div class="item-sub">Heidelberg University (Alfred Weber Institute), Heidelberg, Germany</div>[cite: 4]
+      <p>Grade: 2.0 (Good) | Master's Thesis: <em>Analyzed household investment behavior and financial commitment decisions using complex microdata panels from the Indonesian Family Life Survey (IFLS)</em> (Grade: 1.8)[cite: 4]</p>
     </div>
 
     <div class="item">
       <div class="item-header">
         <span>B.Sc. (Research) in Economics</span>
-        <span>06/2021</span>
+        <span>06/2021</span>[cite: 4]
       </div>
-      <div class="item-sub">Shiv Nadar University, Greater Noida, India</div>
-      <p>Bachelor's Thesis: <em>Investigated macroeconomic liquidity shocks and informal cash circulation anomalies using large-scale NSS expenditure microdata.</em></p>
+      <div class="item-sub">Shiv Nadar University, Greater Noida, India</div>[cite: 4]
+      <p>Bachelor's Thesis: <em>Investigated macroeconomic liquidity shocks and informal cash circulation anomalies using large-scale NSS expenditure microdata[cite: 4].</em></p>
     </div>
-  </section>
+  </div>
 
-  <!-- Section: Projects -->
-  <section id="projects">
+  <!-- View 3: Projects -->
+  <div id="projects" class="tab-content">
     <h2>Projects</h2>
 
     <div class="item">
@@ -116,7 +176,7 @@
         <span><a href="#">Project Title 1</a></span>
         <span>Tools / Languages</span>
       </div>
-      <p>A short summary of what this project does, why you built it, and the tools you used.</p>
+      <p>Brief summary of what this project accomplished, the problem it solved, and key technical highlights or results.</p>
     </div>
 
     <div class="item">
@@ -124,10 +184,29 @@
         <span><a href="#">Project Title 2</a></span>
         <span>Tools / Languages</span>
       </div>
-      <p>A short summary of this project and your key contributions.</p>
+      <p>Brief summary of the architecture, workflow, dataset, or methodology associated with this work.</p>
     </div>
-  </section>
+  </div>
+
+  <!-- Tab Switch Script -->
+  <script>
+    function showTab(tabId) {
+      // Hide all tabs
+      document.querySelectorAll('.tab-content').forEach(tab => {
+        tab.classList.remove('active');
+      });
+      // Remove active underline from buttons
+      document.querySelectorAll('.nav-btn').forEach(btn => {
+        btn.classList.remove('active');
+      });
+
+      // Show selected tab and activate button
+      document.getElementById(tabId).classList.add('active');
+      event.target.classList.add('active');
+    }
+  </script>
 
 </body>
 </html>
+
 
