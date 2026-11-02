@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio</title>
+  <style>
+    :root {
+      --bg: #ffffff;
+      --text: #1a1a1a;
+      --muted: #555555;
+      --border: #e1e4e8;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.6;
+      color: var(--text);
+      background-color: var(--bg);
+      max-width: 750px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+    header {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      margin-bottom: 40px;
+    }
+    .profile-img {
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 1px solid var(--border);
+    }
+    .intro h1 {
+      margin: 0 0 8px 0;
+      font-size: 1.8rem;
+    }
+    .intro p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 1rem;
+    }
+    section {
+      margin-bottom: 40px;
+    }
+    h2 {
+      font-size: 1.3rem;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 6px;
+      margin-bottom: 16px;
+    }
+    .item {
+      margin-bottom: 18px;
+    }
+    .item-header {
+      display: flex;
+      justify-content: space-between;
+      font-weight: 600;
+    }
+    .item-sub {
+      color: var(--muted);
+      font-size: 0.95rem;
+      margin-bottom: 6px;
+    }
+    a {
+      color: #0366d6;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top: Picture & Description -->
+  <header>
+    <img src="profile.jpeg" alt="Profile Picture" class="profile-img">
+    <div class="intro">
+      <h1>Your Name</h1>
+      <p>A short bio about what you do, your background, and your key interests.</p>
+    </div>
+  </header>
+
+  <!-- Section: Education -->
+  <section id="education">
+    <h2>Education</h2>
+    
+    <div class="item">
+      <div class="item-header">
+        <span>Degree & Major</span>
+        <span>Years (e.g. 2020 – 2024)</span>
+      </div>
+      <div class="item-sub">University Name, Location</div>
+      <p>Notable coursework, honors, or focus area.</p>
+    </div>
+  </section>
+
+  <!-- Section: Projects -->
+  <section id="projects">
+    <h2>Projects</h2>
+
+    <div class="item">
+      <div class="item-header">
+        <span><a href="#">Project Title 1</a></span>
+        <span>Tools / Languages</span>
+      </div>
+      <p>A short summary of what this project does, why you built it, and the tools you used.</p>
+    </div>
+
+    <div class="item">
+      <div class="item-header">
+        <span><a href="#">Project Title 2</a></span>
+        <span>Tools / Languages</span>
+      </div>
+      <p>A short summary of this project and your key contributions.</p>
+    </div>
+  </section>
+
+</body>
+</html>
