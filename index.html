@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Your Name - Portfolio</title>
+  <title>Sumedh Ramakrishna - Quantitative Economist</title>
   <style>
     :root {
       --bg: #ffffff;
@@ -21,7 +21,6 @@
       margin: 40px auto;
       padding: 0 20px;
     }
-    /* Top Navigation */
     nav {
       display: flex;
       align-items: center;
@@ -51,7 +50,6 @@
       font-weight: 600;
       border-bottom: 2px solid var(--text);
     }
-    /* Dropdown */
     .dropdown {
       position: relative;
       display: inline-block;
@@ -62,7 +60,7 @@
       top: 100%;
       left: 0;
       background-color: var(--bg);
-      min-width: 200px;
+      min-width: 260px;
       border: 1px solid var(--border);
       border-radius: 6px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.08);
@@ -74,6 +72,7 @@
       padding: 8px 16px;
       color: var(--text);
       border-bottom: none;
+      font-size: 0.95rem;
     }
     .dropdown-menu a:hover {
       background-color: #f6f8fa;
@@ -82,7 +81,6 @@
     .dropdown:hover .dropdown-menu {
       display: block;
     }
-    /* Profile Section */
     .hero {
       display: flex;
       align-items: center;
@@ -102,10 +100,18 @@
       font-size: 1.8rem;
     }
     .hero-text p {
-      margin: 0;
+      margin: 0 0 10px 0;
       color: var(--muted);
     }
-    /* Contact & Download Sections */
+    .work-auth {
+      font-size: 0.9rem;
+      background: #f6f8fa;
+      padding: 10px 12px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      margin-top: 12px;
+    }
     section {
       margin-bottom: 30px;
     }
@@ -132,7 +138,7 @@
     }
     .btn-download {
       display: inline-block;
-      margin-top: 12px;
+      margin-top: 14px;
       padding: 10px 18px;
       background-color: #24292e;
       color: #ffffff;
@@ -143,48 +149,16 @@
     .btn-download:hover {
       background-color: #000000;
       text-decoration: none;
+      color: #ffffff;
+    }
+    @media (max-width: 600px) {
+      .hero {
+        flex-direction: column;
+        text-align: center;
+      }
     }
   </style>
 </head>
 <body>
 
-  <!-- Top Navigation -->
-  <nav>
-    <a href="index.html" class="active">Home</a>
-    <a href="resume.html">Resume</a>
-    <div class="dropdown">
-      <button class="dropdown-btn">Projects &#9662;</button>
-      <div class="dropdown-menu">
-        <a href="project-1.html">Project One Title</a>
-        <a href="project-2.html">Project Two Title</a>
-        <a href="project-3.html">Project Three Title</a>
-      </div>
-    </div>
-  </nav>
-
-  <!-- Profile & Description -->
-  <div class="hero">
-    <img src="profile.jpeg" alt="Profile Picture" class="profile-img">
-    <div class="hero-text">
-      <h1>Your Name</h1>
-      <p>Short professional summary placeholder. Introduce your specialization, quantitative background, and primary analytical focus here.</p>
-    </div>
-  </div>
-
-  <!-- Contact Information -->
-  <section id="contact">
-    <h2>Contact</h2>
-    <ul class="contact-list">
-      <li><strong>Email:</strong> <a href="mailto:placeholder@email.com">placeholder@email.com</a></li>
-      <li><strong>Location:</strong> City, Country</li>
-      <li><strong>LinkedIn:</strong> <a href="#" target="_blank">linkedin.com/in/placeholder</a></li>
-      <li><strong>GitHub:</strong> <a href="#" target="_blank">github.com/placeholder</a></li>
-    </ul>
-    
-    <!-- PDF Download Button -->
-    <a href="resume.pdf" download class="btn-download">&#8595; Download PDF Resume</a>
-  </section>
-
-</body>
-</html>
-
+  <!-- Top
