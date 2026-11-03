@@ -3,8 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Parental Aspirations and Children’s Education:
-Econometric Evidence from Indonesia</title>
+  <title>Parental Aspirations and Children's Education: Econometric Evidence from Indonesia</title>
 
   <!-- MathJax Configuration: standard delimiters without dollar conflicts -->
   <script>
@@ -199,28 +198,28 @@ Econometric Evidence from Indonesia</title>
   </nav>
 
   <!-- Title and Metadata -->
-  <h1>Aspirations, Investment, and the Inverted U (AK and CRRA, ratio form)</h1>
+  <h1>Parental Aspirations and Children's Education: Econometric Evidence from Indonesia</h1>
   <div class="meta">
-    Sumedh Ramakrishna | Alfred Weber Institute, Heidelberg University | November 2025
+    Sumedh Ramakrishna | Master Thesis | Heidelberg University | 2025[cite: 22]
   </div>
 
   <div>
-    <span class="tag">Constrained Optimization</span>
-    <span class="tag">Loss Function Formulation</span>
-    <span class="tag">Empirical Microdata</span>
-    <span class="tag">High Dimensional Fixed Effects</span>
+    <span class="tag">Machine Learning Optimization</span>
+    <span class="tag">Asymmetric Loss Formulation</span>
+    <span class="tag">Feature Engineering</span>
     <span class="tag">Non Linear Regression</span>
-    <span class="tag">R / Stata</span>
+    <span class="tag">High Dimensional Categorical Controls</span>
+    <span class="tag">R / Stata / Python</span>
   </div>
 
   <div class="highlight-card">
-    Applied machine learning and quantitative modeling: Structuring an asymmetric reference dependent objective function, solving for critical bifurcation boundaries, and verifying non linear responses using large scale panel microdata.
+    Applied machine learning and empirical modeling: Formulating an asymmetric reference dependent loss function, solving for critical bifurcation thresholds, and modeling non linear response curves on large scale panel microdata.
   </div>
 
   <!-- Section 1 -->
   <h2>Objective Function and System Constraints</h2>
   <p>
-    In this research, I formulate an optimization problem where agents make dynamic capital allocation decisions subject to forward looking reference targets. Each agent begins with scalar resource endowment \(y &gt; 0\) and allocates it between baseline consumption \(c\) and capital investment \(k\). The production transition kernel is modeled linearly as \(f(k) = \rho k = z\) with productivity parameter \(\rho &gt; 1\). The state budget boundary is defined by:
+    I model household investment decisions as a constrained non linear optimization problem. Each agent starts with a scalar resource endowment \(y &gt; 0\) and determines the optimal resource allocation between current consumption \(c\) and capital investment \(k\)[cite: 35]. Investment yields a next period return \(z = f(k)\) governed by a linear capital production kernel \(f(k) = \rho k = z\) with productivity parameter \(\rho &gt; 1\)[cite: 35, 36]. The budget constraint is defined as[cite: 35]:
   </p>
 
   <div class="math-block">
@@ -228,7 +227,7 @@ Econometric Evidence from Indonesia</title>
   </div>
 
   <p>
-    Preferences are structured using an asymmetric loss function anchored around an exogenous reference target \(a\). The global objective balances immediate utility, future baseline return, and a piecewise penalty reward operator:
+    I define an asymmetric reference dependent utility objective anchored around a forward target \(a\)[cite: 35]. The objective balances baseline consumption, future expected capital return, and a piecewise gain loss penalty term[cite: 35]:
   </p>
 
   <div class="math-block">
@@ -236,13 +235,13 @@ Econometric Evidence from Indonesia</title>
   </div>
 
   <p>
-    Here \(u\), \(w_0\), \(W_G\), and \(W_L\) are concave utility mappings sharing common relative risk aversion elasticity \(\sigma \in (0, 1)\), \(\delta &gt; 0\) represents the intertemporal discount parameter, and \(\pi_L &gt; \pi_G \ge 0\) defines empirical loss aversion where shortfalls are penalized more heavily than gains.
+    Here \(u\), \(w_0\), \(W_G\), and \(W_L\) are concave mappings with common curvature \(\sigma \in (0, 1)\), \(\delta &gt; 0\) represents the discount weight, and \(\pi_L &gt; \pi_G \ge 0\) imposes an asymmetric penalty structure where target shortfalls are penalized more severely than target gains[cite: 35, 36].
   </p>
 
   <!-- Section 2 -->
-  <h2>Scale Normalization and Structural Regimes</h2>
+  <h2>Scale Normalization and Analytical Regimes</h2>
   <p>
-    To eliminate scale dependence and allow clean generalization across heterogeneous resource endowments, I normalize the decision variables into scale invariant ratios. I define the growth factor as \(g = z / y\), the reference ratio as \(r = a / y\), and the investment rate as \(i = k / y = g / \rho\). This transforms the problem into maximizing a reduced piecewise objective:
+    To make decision variables scale invariant across agents, I normalize variables into continuous ratios: the growth factor \(g = z / y\), the aspirations ratio \(r = a / y\), and the investment share \(i = k / y = g / \rho\)[cite: 36]. This transforms the system into maximizing the following reduced piecewise objective[cite: 36]:
   </p>
 
   <div class="math-block">
@@ -250,18 +249,18 @@ Econometric Evidence from Indonesia</title>
   </div>
 
   <p>
-    First order optimization conditions reveal that the agent parameter space partitions into two distinct operating regimes around an optimal bifurcation threshold \(r^* &gt; 1\):
+    First order optimization conditions partition the agent parameter space into two distinct operating regimes around an optimal bifurcation threshold \(r^* &gt; 1\)[cite: 36, 37]:
   </p>
   <ul>
     <li>
-      <strong>Satisfied Regime \( (g \ge r) \) for \( r \le r^* \):</strong> The target lies within reachable budget bounds. Here the first order condition evaluates along the positive reward domain, yielding a positive gradient \(\partial g^* / \partial r &gt; 0\) where higher aspiration goals incentivize greater capital allocation.
+      <strong>Satisfied Regime \( (g \ge r) \) for \( r \le r^* \):</strong> The target is mathematically accessible within the agent budget envelope[cite: 36, 37]. The first order condition evaluates along the positive reward domain, resulting in a positive gradient \(\partial g^* / \partial r &gt; 0\) where higher aspiration goals incentivize greater capital allocation[cite: 37].
     </li>
     <li>
-      <strong>Frustrated Regime \( (g &lt; r) \) for \( r &gt; r^* \):</strong> When the reference target exceeds threshold \(r^*\), attaining it demands unsustainable sacrifice of base consumption. The loss penalty dominates, resulting in a negative gradient \(\partial g^* / \partial r &lt; 0\) where excessive target distance causes an abandonment effect and depresses investment.
+      <strong>Frustrated Regime \( (g &lt; r) \) for \( r &gt; r^* \):</strong> When the target ratio exceeds threshold \(r^*\), attaining it demands an unsustainable sacrifice of base consumption[cite: 36, 37]. The loss penalty dominates, causing a negative gradient \(\partial g^* / \partial r &lt; 0\) where excessive target distance causes an abandonment effect and depresses investment[cite: 37].
     </li>
   </ul>
   <p>
-    Combining both regimes analytically establishes a global inverted U topology for equilibrium investment:
+    Combining both regimes produces a global inverted U topology for equilibrium investment[cite: 37]:
   </p>
 
   <div class="math-block">
@@ -269,68 +268,58 @@ Econometric Evidence from Indonesia</title>
   </div>
 
   <!-- Section 3 -->
-  <h2>Empirical Validation and High Dimensional Controls</h2>
+  <h2>Feature Engineering and Regression Specification</h2>
   <p>
-    I tested whether this non linear optimization pattern holds in real world microdata using \(N = 4{,}651\) longitudinal household records from the Indonesian Family Life Survey. The target metric measures human capital investment, specified as:
+    I trained and validated this model on longitudinal microdata from the Indonesian Family Life Survey (IFLS 5, \(N = 4{,}651\))[cite: 38, 49]. To measure household capital allocation, I engineered a continuous target variable[cite: 46]:
   </p>
 
   <div class="math-block">
-    $$\text{Target Variable} = 100 \times \log(\text{Education expenditure per capita})$$
+    $$\text{Target Variable } y_h = 100 \times \log(\text{Education expenditure per capita})$$
   </div>
 
   <p>
-    To evaluate non linearity and prevent spatial confounding from unobserved community infrastructure, I estimated a quadratic polynomial specification combined with high dimensional Kecamatan neighborhood fixed effects and cluster robust standard errors:
+    Using survey responses where individuals evaluate their current position on a 1 to 6 economic ladder alongside their expected position 5 years in the future, I constructed the continuous aspirations ratio feature[cite: 40, 41]:
   </p>
 
   <div class="math-block">
-    $$\text{Target}_i = \beta_0 + \beta_1 r_i + \beta_2 r_i^2 + \Gamma X_i + \alpha_{\text{kecamatan}} + \varepsilon_i$$
+    $$\text{Aspirations Ratio } r_h = \frac{\text{Economic step in future}_h}{\text{Economic step today}_h}$$
+  </div>
+
+  <p>
+    To model non linearity and eliminate spatial confounding from unobserved community infrastructure, I estimated a quadratic polynomial specification combined with high dimensional Kecamatan neighborhood fixed effects and cluster robust standard errors at the enumeration area level[cite: 45, 46]:
+  </p>
+
+  <div class="math-block">
+    $$y_h = \beta_0 + \beta_1 r_h + \beta_2 r_h^2 + \sum_{s=2}^{6} \beta_{3s} \{ \text{step}_h = s \} + X_h'\theta + Z_h'\gamma + \alpha_{\text{kecamatan}} + \varepsilon_h$$
   </div>
 
   <table class="results-table">
     <thead>
       <tr>
-        <th>Predictor Variable</th>
+        <th>Predictor Feature</th>
         <th>Model (1) Baseline</th>
         <th>Model (2) Demographics</th>
-        <th>Model (3) Full Controls</th>
+        <th>Model (3) Full Specification</th>
       </tr>
     </thead>
     <tbody>
       <tr>
         <td><strong>Aspirations ratio (\(r\))</strong></td>
         <td>35.390*** (12.105)</td>
-        <td>35.392*** (11.891)</td>
+        <td>33.802*** (11.818)</td>
         <td>34.518*** (12.071)</td>
       </tr>
       <tr>
         <td><strong>Aspirations ratio squared (\(r^2\))</strong></td>
         <td>-3.948** (1.903)</td>
-        <td>-4.143** (1.919)</td>
+        <td>-4.141** (1.896)</td>
         <td>-4.334** (1.899)</td>
       </tr>
       <tr>
-        <td>Household Asset Controls</td>
-        <td>No</td>
-        <td>Yes</td>
-        <td>Yes</td>
-      </tr>
-      <tr>
-        <td>Parent Education and Demographics</td>
-        <td>No</td>
-        <td>No</td>
-        <td>Yes</td>
-      </tr>
-      <tr>
-        <td>Kecamatan Fixed Effects</td>
-        <td>Yes</td>
-        <td>Yes</td>
-        <td>Yes</td>
-      </tr>
-      <tr>
-        <td>Standard Error Clustering</td>
-        <td>EA Level</td>
-        <td>EA Level</td>
-        <td>EA Level</td>
+        <td>Fixed Effects and Controls</td>
+        <td>Kecamatan FE, Step Dummies</td>
+        <td>+ Assets, Demographic Controls</td>
+        <td>+ Head Education, Age, Marriage</td>
       </tr>
       <tr>
         <td>Observations (\(N\))</td>
@@ -341,23 +330,23 @@ Econometric Evidence from Indonesia</title>
       <tr>
         <td>R squared</td>
         <td>0.04078</td>
-        <td>0.05940</td>
+        <td>0.07421</td>
         <td>0.08852</td>
       </tr>
     </tbody>
-  </table>
+  </table>[cite: 49]
 
   <!-- Section 4 -->
-  <h2>Machine Learning and Quantitative Insights</h2>
+  <h2>Model Evaluation and Quantitative Insights</h2>
   <ul>
     <li>
-      <strong>Statistical Significance:</strong> Across all specifications, the linear coefficient remains positive and significant (\(\beta_1 \approx 34.52\), \(p &lt; 0.01\)) while the quadratic penalty term is negative and significant (\(\beta_2 \approx -4.33\), \(p &lt; 0.05\)), confirming the inverted U curve.
+      <strong>Non Linear Validation:</strong> In the full model, the linear coefficient is positive and statistically significant (\(\beta_1 = 34.518\), \(p &lt; 0.01\)) while the quadratic penalty term is negative and statistically significant (\(\beta_2 = -4.334\), \(p &lt; 0.05\))[cite: 47, 49]. A Wald test confirms joint significance (\(F = 5.300\), \(p = 0.005\)), empirically validating the non linear inverted U curve[cite: 47, 66].
     </li>
     <li>
-      <strong>Optimal Threshold Calculation:</strong> Differentiating the response function \(\frac{\partial \text{Target}}{\partial r} = \beta_1 + 2\beta_2 r = 0\) yields the empirical turning point at \(r^* = -\frac{\beta_1}{2\beta_2} \approx 3.98\) to \(4.48\). Targets within this ratio accelerate resource allocation, whereas targets set beyond this boundary trigger motivation breakdown and reduce capital commitments.
+      <strong>Optimal Inflection Boundary:</strong> Solving the derivative \(\frac{\partial y_h}{\partial r_h} = \beta_1 + 2\beta_2 r_h = 34.518 - 8.668 r_h = 0\) identifies the inflection boundary at \(r^* = -\frac{\beta_1}{2\beta_2} \approx 3.98\)[cite: 47]. Moving the aspirations ratio from 1 to 2 produces a 26 percent increase in investment, while expanding targets beyond a ratio of 4 causes motivation breakdown and reduces expenditure[cite: 47].
     </li>
     <li>
-      <strong>Applied Data Science Relevance:</strong> Demonstrates experience in objective formulation, modeling asymmetric loss functions, processing large scale survey tables, and implementing high dimensional fixed effects models relevant to behavioral modeling and predictive underwriting.
+      <strong>Subsample and Normalization Checks:</strong> Evaluating a normalized dependent variable scaled by initial ladder rank (\(y_h = 100 \times \log(\text{expenditure} / \text{step})\)) yields an identical turning point at \(r^* \approx 4\)[cite: 48, 51]. When restricted to moderate aspirers on ladder steps 3 to 5, the response curve stays strictly in the satisfied domain, yielding a positive linear response (\(\beta = 27.473\), \(p &lt; 0.01\))[cite: 57, 58].
     </li>
   </ul>
 
