@@ -5,11 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ames Housing Price Prediction and Dynamic Ensembling</title>
 
-  <!-- MathJax Configuration -->
+  <!-- MathJax Configuration: Only \( \) for inline and $$ for display math so currency signs do not trigger math mode -->
   <script>
     window.MathJax = {
       tex: {
-        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        inlineMath: [['\\(', '\\)']],
         displayMath: [['$$', '$$'], ['\\[', '\\]']]
       },
       svg: {
@@ -214,7 +214,7 @@
   </div>
 
   <div class="highlight-card">
-    Kaggle Competition: Housing Prices Competition for Machine Learning Education. Final Standing: Rank 134 out of 3860 teams (Top 3.5%) with a score of 12971.74.
+    Kaggle Competition: Housing Prices Competition for Machine Learning Education. Final Standing: Rank 134 out of 3860 teams with a public score of 12971.74[cite: 11, 12].
   </div>
 
   <!-- Overview -->
@@ -253,7 +253,7 @@
       <strong>Neighborhood Effect (Kruskal Wallis Test):</strong> I tested price differences across neighborhood groups without assuming normality. The test gave an H statistic of 855.07 with a p value of 4.72e-165 and an effect size of 0.5909, confirming that neighborhood alone explains over 59% of rank variance in price.
     </li>
     <li>
-      <strong>Central Air Conditioning (Mann Whitney U Test):</strong> A two sided rank test between houses with and without central cooling gave a U statistic of 111333.50 with a p value of 6.75e-33 and rank biserial correlation of -0.7323.
+      <strong>Central Air Conditioning (Mann Whitney U Test):</strong> A two sided rank test between houses with and without central cooling gave a U statistic of 111333.50 with a p value of 6.75e-33 and rank biserial correlation of negative 0.7323.
     </li>
   </ul>
 
@@ -286,7 +286,7 @@
   <!-- Section 3 -->
   <h2>Model Iterations and Kaggle Submissions</h2>
   <p>
-    I built and submitted four iterative models to the Kaggle competition leaderboard:
+    I built and submitted four iterative models to the Kaggle competition leaderboard[cite: 11, 12]:
   </p>
 
   <table class="results-table">
@@ -303,25 +303,25 @@
         <td><strong>submission_baseline.csv</strong></td>
         <td>LightGBM Regressor</td>
         <td>14632.24</td>
-        <td>Trained on processed log features. Handled standard houses well but struggled with upper boundary price points.</td>
+        <td>Trained on processed log features. Handled standard houses well but struggled with upper boundary price points[cite: 11, 12].</td>
       </tr>
       <tr>
         <td><strong>submission_dynamic_blend.csv</strong></td>
         <td>Initial Dynamic Blend</td>
         <td>14133.55</td>
-        <td>First manual attempt at combining LightGBM and Ridge predictions. Showed an immediate improvement over the single model baseline.</td>
+        <td>First manual attempt at combining LightGBM and Ridge predictions. Showed an immediate improvement over the single model baseline[cite: 11, 12].</td>
       </tr>
       <tr>
         <td><strong>submission_blended.csv</strong></td>
         <td>Cross Validated Blend</td>
         <td>13024.79</td>
-        <td>Ran five fold cross validation to find the optimal fixed weight blend between LightGBM and sample weighted Ridge. The optimal weight was 0.33 for LightGBM and 0.67 for Ridge.</td>
+        <td>Ran five fold cross validation to find the optimal fixed weight blend between LightGBM and sample weighted Ridge. The optimal weight was 0.33 for LightGBM and 0.67 for Ridge[cite: 11, 12].</td>
       </tr>
       <tr>
         <td><strong>submission_optimized_dynamic_blend.csv</strong></td>
         <td>Optimized Dynamic Blend</td>
         <td>12971.74</td>
-        <td>Final model. Replaced the static weight with a continuous logistic weight function parameterized by slope k and price threshold m, optimized using Scipy minimize.</td>
+        <td>Final model. Replaced the static weight with a continuous logistic weight function parameterized by slope k and price threshold m, optimized using Scipy minimize[cite: 11, 12].</td>
       </tr>
     </tbody>
   </table>
@@ -338,7 +338,7 @@
   </div>
 
   <p>
-    Using Scipy minimize on the validation set, the optimization converged to an optimal midpoint threshold m of $210,447.17 and slope k of -0.000005. This allowed the ensemble to weight LightGBM heavily for standard homes below $200,000, and smoothly transition to sample weighted Ridge regression for luxury homes, reaching my best Kaggle public score of 12971.74.
+    Using Scipy minimize on the validation set, the optimization converged to an optimal midpoint threshold m of $210,447.17 and slope k of negative 0.000005. This allowed the ensemble to weight LightGBM heavily for standard homes below $200,000, and smoothly transition to sample weighted Ridge regression for luxury homes, reaching my best Kaggle public score of 12971.74[cite: 11, 12].
   </p>
 
   <div class="figure-container">
@@ -350,7 +350,7 @@
   <h2>Key Findings</h2>
   <ul>
     <li>
-      The continuous logistic blending method reduced public leaderboard error to 12971.74, beating both single models and static weighting schemes.
+      The continuous logistic blending method reduced public leaderboard error to 12971.74, beating both single models and static weighting schemes[cite: 11, 12].
     </li>
     <li>
       Creating interaction terms between overall quality and square footage produced the second and third most split features in LightGBM, outranking individual continuous features like garage area and basement size.
