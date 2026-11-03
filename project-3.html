@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ames Real Estate Valuation & Dynamic Ensembling - Sumedh Ramakrishna</title>
+  <title>Ames Housing Price Prediction and Dynamic Ensembling</title>
 
-  <!-- MathJax Configuration for LaTeX Math -->
+  <!-- MathJax Configuration -->
   <script>
     window.MathJax = {
       tex: {
@@ -190,46 +190,46 @@
     <div class="dropdown">
       <button class="dropdown-btn">Projects &#9662;</button>
       <div class="dropdown-menu">
-        <a href="project-1.html">Master's Thesis (IFLS Econometrics)</a>
-        <a href="project-2.html">Deep Sequence Modeling (NLP)</a>
-        <a href="project-3.html">Ames Real Estate Valuation (ML)</a>
-        <a href="project-4.html">Bachelor's Thesis (NSS Liquidity)</a>
+        <a href="project-1.html">Master Thesis</a>
+        <a href="project-2.html">Deep Sequence Modeling</a>
+        <a href="project-3.html">Ames Housing Price Prediction</a>
+        <a href="project-4.html">Bachelor Thesis</a>
       </div>
     </div>
   </nav>
 
-  <!-- Title & Metadata -->
-  <h1>Non-Linear Feature Interactions and Dynamic Ensembling in Real Estate Valuation</h1>
+  <!-- Title and Metadata -->
+  <h1>Ames Housing Price Prediction and Dynamic Ensembling</h1>
   <div class="meta">
-    Sumedh Ramakrishna | Applied Machine Learning & Econometric Engineering | Ames Housing Benchmark
+    Sumedh Ramakrishna | Machine Learning and Econometric Modeling | Kaggle Competition
   </div>
 
   <div>
     <span class="tag">LightGBM</span>
-    <span class="tag">L1/L2 Regularization</span>
-    <span class="tag">Non-Parametric Tests</span>
-    <span class="tag">Feature Interaction</span>
-    <span class="tag">Parametric Ensembling</span>
-    <span class="tag">K-Fold Validation</span>
+    <span class="tag">Ridge Regression</span>
+    <span class="tag">Lasso Feature Selection</span>
+    <span class="tag">Nonparametric Tests</span>
+    <span class="tag">Feature Engineering</span>
+    <span class="tag">Dynamic Ensembling</span>
   </div>
 
   <div class="highlight-card">
-    <strong>Competitive Benchmark Performance:</strong> Evaluated on the global Kaggle benchmark (<em>Housing Prices Competition for Machine Learning Education</em>), achieving a competitive standing of <strong>Rank 134 out of 3,860 teams (Top 3.5%)</strong> with a final optimized public score of <strong>12,971.74</strong>.
+    Kaggle Competition: Housing Prices Competition for Machine Learning Education. Final Standing: Rank 134 out of 3860 teams (Top 3.5%) with a score of 12971.74.
   </div>
 
   <!-- Overview -->
-  <h2>Executive Summary</h2>
+  <h2>Project Overview</h2>
   <p>
-    Residential real estate pricing presents pronounced structural challenges: skewed parametric distributions, sparse categorical indicators, cross-feature interaction dependencies, and non-linear heteroscedasticity across extreme valuations. 
+    In this project, I worked on predicting residential property valuations using the Ames Housing dataset. Real estate data has specific empirical challenges, including right skewed price distributions, sparse categorical fields, and strong feature interactions. Tree models like LightGBM perform well on typical homes but fail to extrapolate on expensive properties, while linear models like Ridge regression extrapolate well but miss localized threshold steps.
   </p>
   <p>
-    This project constructs an end-to-end econometric and machine learning pipeline applied to the 79-feature Ames Housing dataset. The final architecture bypasses standard static averaging by optimizing a continuous non-linear parametric blend between gradient-boosted decision trees (LightGBM) and high-dimensional regularized regression (L2-penalized Ridge), systematically minimizing tail-risk prediction errors.
+    To solve this, I designed an iterative pipeline that combined feature selection via Lasso, domain informed interaction terms, and a continuous logistic weighting function that smoothly blends LightGBM and Ridge predictions based on price level.
   </p>
 
   <!-- Section 1 -->
-  <h2>Target Normalization & Statistical Hypothesis Testing</h2>
+  <h2>Target Distribution and Nonparametric Tests</h2>
   <p>
-    Analysis of the raw target variable ($\text{SalePrice}$) revealed severe positive skewness ($\gamma_1 = 1.88$) and heavy kurtosis ($\gamma_2 = 6.51$), which introduces quadratic loss instability into gradient descent. A monotonic logarithmic transformation was implemented:
+    I started by looking at the raw distribution of the target variable, SalePrice. The raw target had strong positive skewness of 1.88 and kurtosis of 6.51. To stabilize variance and allow for squared error optimization, I applied a log transformation:
   </p>
 
   <div class="math-block">
@@ -237,49 +237,56 @@
   </div>
 
   <p>
-    As illustrated below, this reduced skewness to $0.12$ and kurtosis to $0.80$, generating a near-Gaussian distribution suited for squared error optimization.
+    This log transform reduced skewness to 0.12 and kurtosis to 0.80, giving a near normal distribution.
   </p>
 
   <div class="figure-container">
     <img src="housing_target_distribution.png" alt="SalePrice Target Distribution Transformation">
-    <div class="figure-caption">Figure 1: Target distribution transformation from raw monetary units (heavy right skew) to log space (normalized Gaussian profile).</div>
+    <div class="figure-caption">Figure 1: Target distribution before and after log transformation.</div>
   </div>
 
   <p>
-    To identify primary qualitative drivers prior to feature encoding, non-parametric statistical tests were executed:
+    I also removed large physical outliers, including properties with first floor area exceeding 2700 square feet, basement area exceeding 3000 square feet, and the largest leverage points in living and garage area. To check how much categorical variables explained price variation, I ran two nonparametric statistical tests:
   </p>
   <ul>
     <li>
-      <strong>Neighborhood Disparity (Kruskal-Wallis $H$-Test):</strong> Evaluated spatial asset variation across neighborhoods without assuming normality. The test yielded $H = 855.07$ ($p = 4.72 \times 10^{-165}$) with an effect size of $\epsilon^2 = 0.5909$, confirming that localized neighborhood zoning accounts for over 59% of rank variance in price.
+      <strong>Neighborhood Effect (Kruskal Wallis Test):</strong> I tested price differences across neighborhood groups without assuming normality. The test gave an H statistic of 855.07 with a p value of 4.72e-165 and an effect size of 0.5909, confirming that neighborhood alone explains over 59% of rank variance in price.
     </li>
     <li>
-      <strong>Central Air Conditioning (Mann-Whitney $U$-Test):</strong> Two-sided rank comparison between cooled and uncooled units indicated a significant premium ($U = 111{,}333.50$, $p = 6.75 \times 10^{-33}$, rank-biserial correlation $r_{\text{rb}} = -0.7323$).
+      <strong>Central Air Conditioning (Mann Whitney U Test):</strong> A two sided rank test between houses with and without central cooling gave a U statistic of 111333.50 with a p value of 6.75e-33 and rank biserial correlation of -0.7323.
     </li>
   </ul>
 
   <!-- Section 2 -->
-  <h2>Lasso Feature Selection & Structural Interaction Terms</h2>
+  <h2>Lasso Feature Selection and Interaction Terms</h2>
   <p>
-    High-cardinality dummy encoding expanded the initial feature space to 244 dimensions. An L1-penalized sparse Lasso operator ($\alpha = 0.1$) was deployed on standardized inputs to isolate irreducible valuation drivers, shrinking the matrix to five primary structural pillars: <code>OverallQual</code> ($\beta = 0.154$), <code>GrLivArea</code> ($\beta = 0.062$), <code>GarageCars</code> ($\beta = 0.041$), <code>TotalBsmtSF</code> ($\beta = 0.013$), and <code>YearBuilt</code> ($\beta = 0.006$).
+    After encoding low cardinality categorical variables, the feature space expanded to 244 columns. I applied a Lasso regression with a strong regularization penalty (&alpha; = 0.1) on standardized features to identify the primary predictors. Lasso pushed most coefficients to zero and kept only five structural features:
   </p>
+  <ul>
+    <li>OverallQual: 0.1541</li>
+    <li>GrLivArea: 0.0622</li>
+    <li>GarageCars: 0.0411</li>
+    <li>TotalBsmtSF: 0.0129</li>
+    <li>YearBuilt: 0.0065</li>
+  </ul>
   <p>
-    Because home buyers evaluate spatial dimensions through the prism of finishing quality, domain-informed multiplicative interaction terms were engineered:
+    Because buyers value area according to quality, I engineered two multiplicative interaction variables:
   </p>
 
   <div class="math-block">
-    $$\text{Qual\_x\_GrLivArea} = \text{OverallQual} \times \text{GrLivArea}$$
-    $$\text{Qual\_x\_TotalBsmtSF} = \text{OverallQual} \times \text{TotalBsmtSF}$$
+    $$\text{Quality} \times \text{Living Area} = \text{OverallQual} \times \text{GrLivArea}$$
+    $$\text{Quality} \times \text{Basement Area} = \text{OverallQual} \times \text{TotalBsmtSF}$$
   </div>
 
   <div class="figure-container">
     <img src="housing_feature_importance.png" alt="LightGBM Feature Importance Splits">
-    <div class="figure-caption">Figure 2: Tree-split frequencies in LightGBM, highlighting the predictive dominance of the engineered interaction terms over baseline continuous variables.</div>
+    <div class="figure-caption">Figure 2: Top feature split counts in LightGBM, showing the importance of the interaction terms.</div>
   </div>
 
   <!-- Section 3 -->
-  <h2>Model Iterations & Kaggle Submissions Breakdown</h2>
+  <h2>Model Iterations and Kaggle Submissions</h2>
   <p>
-    The modeling workflow advanced through four distinct iterative architectures, with submissions deployed to the Kaggle Leaderboard to track out-of-sample generalization:
+    I built and submitted four iterative models to the Kaggle competition leaderboard:
   </p>
 
   <table class="results-table">
@@ -287,54 +294,69 @@
       <tr>
         <th>Submission File</th>
         <th>Model Architecture</th>
-        <th>Kaggle Public LB Score</th>
-        <th>Performance Analysis</th>
+        <th>Public Score</th>
+        <th>Summary</th>
       </tr>
     </thead>
     <tbody>
       <tr>
-        <td><strong><code>submission_baseline.csv</code></strong></td>
-        <td>LightGBM Regressor (Baseline)</td>
-        <td>14,632.24</td>
-        <td>Established a solid tree-based baseline, but exhibited unregularized variance and prediction saturation at extreme valuations.</td>
+        <td><strong>submission_baseline.csv</strong></td>
+        <td>LightGBM Regressor</td>
+        <td>14632.24</td>
+        <td>Trained on processed log features. Handled standard houses well but struggled with upper boundary price points.</td>
       </tr>
       <tr>
-        <td><strong><code>submission_dynamic_blend.csv</code></strong></td>
-        <td>Unoptimized Dynamic Blend</td>
-        <td>14,133.55</td>
-        <td>Initial manual threshold blending attempt between LightGBM and Ridge, proving the viability of multi-model ensembling.</td>
+        <td><strong>submission_dynamic_blend.csv</strong></td>
+        <td>Initial Dynamic Blend</td>
+        <td>14133.55</td>
+        <td>First manual attempt at combining LightGBM and Ridge predictions. Showed an immediate improvement over the single model baseline.</td>
       </tr>
       <tr>
-        <td><strong><code>submission_blended.csv</code></strong></td>
-        <td>K-Fold Static Blended Ensemble ($a = 0.33$)</td>
-        <td>13,024.79</td>
-        <td>A static linear average ($0.33 \times \text{LGB} + 0.67 \times \text{Ridge}$), yielding a major accuracy boost by combining linear extrapolation with non-linear splits.</td>
+        <td><strong>submission_blended.csv</strong></td>
+        <td>Cross Validated Blend</td>
+        <td>13024.79</td>
+        <td>Ran five fold cross validation to find the optimal fixed weight blend between LightGBM and sample weighted Ridge. The optimal weight was 0.33 for LightGBM and 0.67 for Ridge.</td>
       </tr>
       <tr>
-        <td><strong><code>submission_optimized_dynamic_blend.csv</code></strong></td>
-        <td><strong>SciPy Optimized Dynamic Logistic Ensemble</strong></td>
-        <td><strong>12,971.74</strong></td>
-        <td><strong>Top 3.5% Finish (Rank 134/3,860):</strong> Utilized SciPy optimization to determine the optimal continuous logistic blending function ($m^* = \$210{,}447.17$), dynamically weighting Ridge over LightGBM for luxury assets.</td>
+        <td><strong>submission_optimized_dynamic_blend.csv</strong></td>
+        <td>Optimized Dynamic Blend</td>
+        <td>12971.74</td>
+        <td>Final model. Replaced the static weight with a continuous logistic weight function parameterized by slope k and price threshold m, optimized using Scipy minimize.</td>
       </tr>
     </tbody>
   </table>
 
-  <div class="figure-container">
-    <img src="housing_model_parity_scatter.png" alt="Prediction Parity Scatter Plots">
-    <div class="figure-caption">Figure 3: Predicted vs. actual validation parity plots demonstrating superior alignment along the $y = x$ diagonal in the dynamically blended ensemble.</div>
+  <!-- Section 4 -->
+  <h2>Dynamic Logistic Ensembling</h2>
+  <p>
+    In the final submission, rather than using a static average across all price levels, I modeled the ensemble weight as a logistic function of price:
+  </p>
+
+  <div class="math-block">
+    $$w(P) = \frac{1}{1 + \exp(-k (P - m))}$$
+    $$\hat{y}_{\text{final}} = w(P) \cdot \hat{y}_{\text{LGB}} + (1 - w(P)) \cdot \hat{y}_{\text{Ridge}}$$
   </div>
 
-  <!-- Section 4 -->
-  <h2>Core Technical Takeaways</h2>
+  <p>
+    Using Scipy minimize on the validation set, the optimization converged to an optimal midpoint threshold m of $210,447.17 and slope k of -0.000005. This allowed the ensemble to weight LightGBM heavily for standard homes below $200,000, and smoothly transition to sample weighted Ridge regression for luxury homes, reaching my best Kaggle public score of 12971.74.
+  </p>
+
+  <div class="figure-container">
+    <img src="housing_model_parity_scatter.png" alt="Prediction Parity Scatter Plots">
+    <div class="figure-caption">Figure 3: Predicted versus actual validation plots across the model progression.</div>
+  </div>
+
+  <!-- Section 5 -->
+  <h2>Key Findings</h2>
   <ul>
     <li>
-      <strong>Error Compression:</strong> The continuous parametric ensemble method drove the Kaggle Public Leaderboard score down to <strong>12,971.74</strong>, outperforming both the static baseline and the manual K-Fold average.
+      The continuous logistic blending method reduced public leaderboard error to 12971.74, beating both single models and static weighting schemes.
     </li>
     <li>
-      <strong>Domain-Informed Interactions:</strong> Multiplying ordinal build quality against raw square footage generated the second and third most influential feature splits in the LightGBM model, surpassing raw attributes like garage area and basement size.
+      Creating interaction terms between overall quality and square footage produced the second and third most split features in LightGBM, outranking individual continuous features like garage area and basement size.
     </li>
     <li>
-      <strong>Tail-Risk Handling:</strong> Sample-weighting the linear regularizer mitigated standard tree saturation at the luxury valuation boundary, successfully mapping extrapolation zones that standard gradient boosting fails to capture.
+      Assigning heavier sample weights to expensive properties in Ridge regression prevented the linear model from underpredicting high valuation properties.
     </li>
   </ul>
 
