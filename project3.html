@@ -3,22 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ames Real Estate Valuation & Dynamic Ensembling - Sumedh Ramakrishna</title>
-
-  <!-- MathJax Configuration for LaTeX Math -->
-  <script>
-    window.MathJax = {
-      tex: {
-        inlineMath: [['$', '$'], ['\\(', '\\)']],
-        displayMath: [['$$', '$$'], ['\\[', '\\]']]
-      },
-      svg: {
-        fontCache: 'global'
-      }
-    };
-  </script>
-  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-
+  <title>Sumedh Ramakrishna - Portfolio</title>
   <style>
     :root {
       --bg: #ffffff;
@@ -29,10 +14,10 @@
     }
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      line-height: 1.65;
+      line-height: 1.6;
       color: var(--text);
       background-color: var(--bg);
-      max-width: 800px;
+      max-width: 750px;
       margin: 40px auto;
       padding: 0 20px;
     }
@@ -58,8 +43,12 @@
       gap: 4px;
       font-family: inherit;
     }
-    nav a:hover, .dropdown-btn:hover {
+    nav a:hover, .dropdown-btn:hover, nav a.active {
       color: var(--text);
+    }
+    nav a.active {
+      font-weight: 600;
+      border-bottom: 2px solid var(--text);
     }
     .dropdown {
       position: relative;
@@ -92,85 +81,53 @@
     .dropdown:hover .dropdown-menu {
       display: block;
     }
-    h1 {
-      font-size: 1.75rem;
-      line-height: 1.3;
-      margin-bottom: 8px;
+    .hero {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      margin-bottom: 36px;
     }
-    .meta {
+    .profile-img {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+    .hero-text h1 {
+      margin: 0 0 8px 0;
+      font-size: 1.8rem;
+    }
+    .hero-text p {
+      margin: 0 0 10px 0;
       color: var(--muted);
-      font-size: 0.95rem;
-      margin-bottom: 16px;
     }
-    .tag {
-      display: inline-block;
-      background: #f1f8ff;
-      color: #0366d6;
-      border: 1px solid #c8e1ff;
-      padding: 2px 8px;
-      border-radius: 12px;
-      font-size: 0.85rem;
-      margin-right: 6px;
-      margin-bottom: 16px;
+    .work-auth {
+      font-size: 0.9rem;
+      background: #f6f8fa;
+      padding: 10px 12px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      margin-top: 12px;
+    }
+    section {
+      margin-bottom: 30px;
     }
     h2 {
       font-size: 1.25rem;
       border-bottom: 1px solid var(--border);
       padding-bottom: 6px;
-      margin-top: 32px;
       margin-bottom: 14px;
     }
-    ul {
-      padding-left: 20px;
+    .contact-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
     }
-    li {
+    .contact-list li {
       margin-bottom: 8px;
-    }
-    .results-table {
-      width: 100%;
-      border-collapse: collapse;
-      margin: 20px 0;
-      font-size: 0.9rem;
-    }
-    .results-table th, .results-table td {
-      border: 1px solid var(--border);
-      padding: 8px 12px;
-      text-align: left;
-    }
-    .results-table th {
-      background-color: #f6f8fa;
-      font-weight: 600;
-    }
-    .figure-container {
-      margin: 24px 0;
-      text-align: center;
-    }
-    .figure-container img {
-      width: 100%;
-      max-width: 760px;
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      background-color: #ffffff;
-    }
-    .figure-caption {
-      font-size: 0.88rem;
-      color: var(--muted);
-      margin-top: 8px;
-    }
-    .math-block {
-      background: #f8fafc;
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      padding: 12px 16px;
-      margin: 16px 0;
-      overflow-x: auto;
-    }
-    .highlight-card {
-      background: #f6f8fa;
-      border-left: 4px solid #0366d6;
-      padding: 12px 16px;
-      margin: 18px 0;
-      font-size: 0.95rem;
     }
     a {
       color: var(--link);
@@ -179,13 +136,34 @@
     a:hover {
       text-decoration: underline;
     }
+    .btn-download {
+      display: inline-block;
+      margin-top: 14px;
+      padding: 10px 18px;
+      background-color: #24292e;
+      color: #ffffff;
+      border-radius: 6px;
+      font-weight: 500;
+      text-decoration: none;
+    }
+    .btn-download:hover {
+      background-color: #000000;
+      text-decoration: none;
+      color: #ffffff;
+    }
+    @media (max-width: 600px) {
+      .hero {
+        flex-direction: column;
+        text-align: center;
+      }
+    }
   </style>
 </head>
 <body>
 
   <!-- Top Navigation -->
   <nav>
-    <a href="index.html">Home</a>
+    <a href="index.html" class="active">Home</a>
     <a href="resume.html">Resume</a>
     <div class="dropdown">
       <button class="dropdown-btn">Projects &#9662;</button>
@@ -198,145 +176,31 @@
     </div>
   </nav>
 
-  <!-- Title & Metadata -->
-  <h1>Non-Linear Feature Interactions and Dynamic Ensembling in Real Estate Valuation</h1>
-  <div class="meta">
-    Sumedh Ramakrishna | Applied Machine Learning & Econometric Engineering | Ames Housing Benchmark
+  <!-- Profile & Description -->
+  <div class="hero">
+    <img src="profile.jpeg" alt="Sumedh Ramakrishna" class="profile-img">
+    <div class="hero-text">
+      <h1>Sumedh Ramakrishna</h1>
+      <p>Economist specializing in data analysis, machine learning, econometric modeling, and behavioral economics. Skilled in supervised/unsupervised learning, causal inference, and experimental design. Proficient in SQL, R, Python, and Stata for data querying and reproducible workflows, with working familiarity in building LLM-based autonomous agent workflows. Seeking roles in financial analysis, data analytics, or economic research.</p>
+      
+      <div class="work-auth">
+        <strong>Work Eligibility:</strong> Eligible to work without visa sponsorship in Germany, India, United Kingdom (2-year HPI visa), and Netherlands (1-year Orientation visa)[cite: 4].
+      </div>
+    </div>
   </div>
 
-  <div>
-    <span class="tag">LightGBM</span>
-    <span class="tag">L1/L2 Regularization</span>
-    <span class="tag">Non-Parametric Tests</span>
-    <span class="tag">Feature Interaction</span>
-    <span class="tag">Parametric Ensembling</span>
-    <span class="tag">K-Fold Validation</span>
-  </div>
-
-  <div class="highlight-card">
-    <strong>Competitive Benchmark Performance:</strong> Evaluated on the global Kaggle benchmark (<em>Housing Prices Competition for Machine Learning Education</em>), achieving a competitive standing of <strong>Rank 134 out of 3,860 teams (Top 3.5%)</strong> with a final optimized public score of <strong>12,971.74</strong>.
-  </div>
-
-  <!-- Overview -->
-  <h2>Executive Summary</h2>
-  <p>
-    Residential real estate pricing presents pronounced structural challenges: skewed parametric distributions, sparse categorical indicators, cross-feature interaction dependencies, and non-linear heteroscedasticity across extreme valuations. 
-  </p>
-  <p>
-    This project constructs an end-to-end econometric and machine learning pipeline applied to the 79-feature Ames Housing dataset. The final architecture bypasses standard static averaging by optimizing a continuous non-linear parametric blend between gradient-boosted decision trees (LightGBM) and high-dimensional regularized regression (L2-penalized Ridge), systematically minimizing tail-risk prediction errors.
-  </p>
-
-  <!-- Section 1 -->
-  <h2>Target Normalization & Statistical Hypothesis Testing</h2>
-  <p>
-    Analysis of the raw target variable ($\text{SalePrice}$) revealed severe positive skewness ($\gamma_1 = 1.88$) and heavy kurtosis ($\gamma_2 = 6.51$), which introduces quadratic loss instability into gradient descent. A monotonic logarithmic transformation was implemented:
-  </p>
-
-  <div class="math-block">
-    $$y_{\text{log}} = \ln(1 + \text{SalePrice})$$
-  </div>
-
-  <p>
-    As illustrated below, this reduced skewness to $0.12$ and kurtosis to $0.80$, generating a near-Gaussian distribution suited for squared error optimization.
-  </p>
-
-  <div class="figure-container">
-    <img src="housing_target_distribution.png" alt="SalePrice Target Distribution Transformation">
-    <div class="figure-caption">Figure 1: Target distribution transformation from raw monetary units (heavy right skew) to log space (normalized Gaussian profile).</div>
-  </div>
-
-  <p>
-    To identify primary qualitative drivers prior to feature encoding, non-parametric statistical tests were executed:
-  </p>
-  <ul>
-    <li>
-      <strong>Neighborhood Disparity (Kruskal-Wallis $H$-Test):</strong> Evaluated spatial asset variation across neighborhoods without assuming normality. The test yielded $H = 855.07$ ($p = 4.72 \times 10^{-165}$) with an effect size of $\epsilon^2 = 0.5909$, confirming that localized neighborhood zoning accounts for over 59% of rank variance in price.
-    </li>
-    <li>
-      <strong>Central Air Conditioning (Mann-Whitney $U$-Test):</strong> Two-sided rank comparison between cooled and uncooled units indicated a significant premium ($U = 111{,}333.50$, $p = 6.75 \times 10^{-33}$, rank-biserial correlation $r_{\text{rb}} = -0.7323$).
-    </li>
-  </ul>
-
-  <!-- Section 2 -->
-  <h2>Lasso Feature Selection & Structural Interaction Terms</h2>
-  <p>
-    High-cardinality dummy encoding expanded the initial feature space to 244 dimensions. An L1-penalized sparse Lasso operator ($\alpha = 0.1$) was deployed on standardized inputs to isolate irreducible valuation drivers, shrinking the matrix to five primary structural pillars: <code>OverallQual</code> ($\beta = 0.154$), <code>GrLivArea</code> ($\beta = 0.062$), <code>GarageCars</code> ($\beta = 0.041$), <code>TotalBsmtSF</code> ($\beta = 0.013$), and <code>YearBuilt</code> ($\beta = 0.006$).
-  </p>
-  <p>
-    Because home buyers evaluate spatial dimensions through the prism of finishing quality, domain-informed multiplicative interaction terms were engineered:
-  </p>
-
-  <div class="math-block">
-    $$\text{Qual\_x\_GrLivArea} = \text{OverallQual} \times \text{GrLivArea}$$
-    $$\text{Qual\_x\_TotalBsmtSF} = \text{OverallQual} \times \text{TotalBsmtSF}$$
-  </div>
-
-  <div class="figure-container">
-    <img src="housing_feature_importance.png" alt="LightGBM Feature Importance Splits">
-    <div class="figure-caption">Figure 2: Tree-split frequencies in LightGBM, highlighting the predictive dominance of the engineered interaction terms over baseline continuous variables.</div>
-  </div>
-
-  <!-- Section 3 -->
-  <h2>Model Iterations & Kaggle Submissions Breakdown</h2>
-  <p>
-    The modeling workflow advanced through four distinct iterative architectures, with submissions deployed to the Kaggle Leaderboard to track out-of-sample generalization:
-  </p>
-
-  <table class="results-table">
-    <thead>
-      <tr>
-        <th>Submission File</th>
-        <th>Model Architecture</th>
-        <th>Kaggle Public LB Score</th>
-        <th>Performance Analysis</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><strong><code>submission_baseline.csv</code></strong></td>
-        <td>LightGBM Regressor (Baseline)</td>
-        <td>14,632.24</td>
-        <td>Established a solid tree-based baseline, but exhibited unregularized variance and prediction saturation at extreme valuations.</td>
-      </tr>
-      <tr>
-        <td><strong><code>submission_dynamic_blend.csv</code></strong></td>
-        <td>Unoptimized Dynamic Blend</td>
-        <td>14,133.55</td>
-        <td>Initial manual threshold blending attempt between LightGBM and Ridge, proving the viability of multi-model ensembling.</td>
-      </tr>
-      <tr>
-        <td><strong><code>submission_blended.csv</code></strong></td>
-        <td>K-Fold Static Blended Ensemble ($a = 0.33$)</td>
-        <td>13,024.79</td>
-        <td>A static linear average ($0.33 \times \text{LGB} + 0.67 \times \text{Ridge}$), yielding a major accuracy boost by combining linear extrapolation with non-linear splits.</td>
-      </tr>
-      <tr>
-        <td><strong><code>submission_optimized_dynamic_blend.csv</code></strong></td>
-        <td><strong>SciPy Optimized Dynamic Logistic Ensemble</strong></td>
-        <td><strong>12,971.74</strong></td>
-        <td><strong>Top 3.5% Finish (Rank 134/3,860):</strong> Utilized SciPy optimization to determine the optimal continuous logistic blending function ($m^* = \$210{,}447.17$), dynamically weighting Ridge over LightGBM for luxury assets.</td>
-      </tr>
-    </tbody>
-  </table>
-
-  <div class="figure-container">
-    <img src="housing_model_parity_scatter.png" alt="Prediction Parity Scatter Plots">
-    <div class="figure-caption">Figure 3: Predicted vs. actual validation parity plots demonstrating superior alignment along the $y = x$ diagonal in the dynamically blended ensemble.</div>
-  </div>
-
-  <!-- Section 4 -->
-  <h2>Core Technical Takeaways</h2>
-  <ul>
-    <li>
-      <strong>Error Compression:</strong> The continuous parametric ensemble method drove the Kaggle Public Leaderboard score down to **12,971.74**, outperforming both the static baseline and the manual K-Fold average.
-    </li>
-    <li>
-      <strong>Domain-Informed Interactions:</strong> Multiplying ordinal build quality against raw square footage generated the second and third most influential feature splits in the LightGBM model, surpassing raw attributes like garage area and basement size.
-    </li>
-    <li>
-      <strong>Tail-Risk Handling:</strong> Sample-weighting the linear regularizer mitigated standard tree saturation at the luxury valuation boundary, successfully mapping extrapolation zones that standard gradient boosting fails to capture.
-    </li>
-  </ul>
+  <!-- Contact Information -->
+  <section id="contact">
+    <h2>Contact</h2>
+    <ul class="contact-list">
+      <li><strong>Email:</strong> <a href="mailto:sumedhrooney1@gmail.com">sumedhrooney1@gmail.com</a></li>
+      <li><strong>Location:</strong> Heidelberg, Germany[cite: 4]</li>
+      <li><strong>Phone:</strong> +49 15231629556[cite: 4]</li>
+      <li><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/sumedh-ramakrishna-0580a5128" target="_blank" rel="noopener noreferrer">linkedin.com/in/sumedh-ramakrishna-0580a5128</a></li>
+    </ul>
+    
+    <a href="resume.pdf" download class="btn-download">&#8595; Download PDF Resume</a>
+  </section>
 
 </body>
 </html>
