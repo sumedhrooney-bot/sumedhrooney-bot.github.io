@@ -214,7 +214,7 @@
   </div>
 
   <div class="highlight-card">
-    Kaggle Competition: Housing Prices Competition for Machine Learning Education. Final Standing: Rank 134 out of 3860 teams with a public score of 12971.74[cite: 11, 12].
+    Kaggle Competition: Housing Prices Competition for Machine Learning Education. Final Standing: Rank 134 out of 3860 teams with a public score of 12971.74.
   </div>
 
   <!-- Overview -->
@@ -286,7 +286,7 @@
   <!-- Section 3 -->
   <h2>Model Iterations and Kaggle Submissions</h2>
   <p>
-    I built and submitted four iterative models to the Kaggle competition leaderboard[cite: 11, 12]:
+    I built and submitted four iterative models to the Kaggle competition leaderboard:
   </p>
 
   <table class="results-table">
@@ -303,25 +303,25 @@
         <td><strong>submission_baseline.csv</strong></td>
         <td>LightGBM Regressor</td>
         <td>14632.24</td>
-        <td>Trained on processed log features. Handled standard houses well but struggled with upper boundary price points[cite: 11, 12].</td>
+        <td>Trained on processed log features. Handled standard houses well but struggled with upper boundary price points.</td>
       </tr>
       <tr>
         <td><strong>submission_dynamic_blend.csv</strong></td>
         <td>Initial Dynamic Blend</td>
         <td>14133.55</td>
-        <td>First manual attempt at combining LightGBM and Ridge predictions. Showed an immediate improvement over the single model baseline[cite: 11, 12].</td>
+        <td>First manual attempt at combining LightGBM and Ridge predictions. Showed an immediate improvement over the single model baseline.</td>
       </tr>
       <tr>
         <td><strong>submission_blended.csv</strong></td>
         <td>Cross Validated Blend</td>
         <td>13024.79</td>
-        <td>Ran five fold cross validation to find the optimal fixed weight blend between LightGBM and sample weighted Ridge. The optimal weight was 0.33 for LightGBM and 0.67 for Ridge[cite: 11, 12].</td>
+        <td>Ran five fold cross validation to find the optimal fixed weight blend between LightGBM and sample weighted Ridge. The optimal weight was 0.33 for LightGBM and 0.67 for Ridge.</td>
       </tr>
       <tr>
         <td><strong>submission_optimized_dynamic_blend.csv</strong></td>
         <td>Optimized Dynamic Blend</td>
         <td>12971.74</td>
-        <td>Final model. Replaced the static weight with a continuous logistic weight function parameterized by slope k and price threshold m, optimized using Scipy minimize[cite: 11, 12].</td>
+        <td>Final model. Replaced the static weight with a continuous logistic weight function parameterized by slope k and price threshold m, optimized using Scipy minimize.</td>
       </tr>
     </tbody>
   </table>
@@ -338,7 +338,7 @@
   </div>
 
   <p>
-    Using Scipy minimize on the validation set, the optimization converged to an optimal midpoint threshold m of $210,447.17 and slope k of negative 0.000005. This allowed the ensemble to weight LightGBM heavily for standard homes below $200,000, and smoothly transition to sample weighted Ridge regression for luxury homes, reaching my best Kaggle public score of 12971.74[cite: 11, 12].
+    Using Scipy minimize on the validation set, the optimization converged to an optimal midpoint threshold m of $210,447.17 and slope k of negative 0.000005. This allowed the ensemble to weight LightGBM heavily for standard homes below $200,000, and smoothly transition to sample weighted Ridge regression for luxury homes, reaching my best Kaggle public score of 12971.74.
   </p>
 
   <div class="figure-container">
@@ -350,7 +350,7 @@
   <h2>Key Findings</h2>
   <ul>
     <li>
-      The continuous logistic blending method reduced public leaderboard error to 12971.74, beating both single models and static weighting schemes[cite: 11, 12].
+      The continuous logistic blending method reduced public leaderboard error to 12971.74, beating both single models and static weighting schemes.
     </li>
     <li>
       Creating interaction terms between overall quality and square footage produced the second and third most split features in LightGBM, outranking individual continuous features like garage area and basement size.
