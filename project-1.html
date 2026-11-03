@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Project One - Details</title>
+  <title>Master's Thesis - Sumedh Ramakrishna</title>
   <style>
     :root {
       --bg: #ffffff;
@@ -56,7 +56,7 @@
       top: 100%;
       left: 0;
       background-color: var(--bg);
-      min-width: 200px;
+      min-width: 260px;
       border: 1px solid var(--border);
       border-radius: 6px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.08);
@@ -68,6 +68,7 @@
       padding: 8px 16px;
       color: var(--text);
       border-bottom: none;
+      font-size: 0.95rem;
     }
     .dropdown-menu a:hover {
       background-color: #f6f8fa;
@@ -83,7 +84,7 @@
     .meta {
       color: var(--muted);
       font-size: 0.95rem;
-      margin-bottom: 20px;
+      margin-bottom: 16px;
     }
     .tag {
       display: inline-block;
@@ -100,7 +101,7 @@
       font-size: 1.25rem;
       border-bottom: 1px solid var(--border);
       padding-bottom: 6px;
-      margin-top: 24px;
+      margin-top: 28px;
       margin-bottom: 12px;
     }
     ul {
@@ -109,12 +110,35 @@
     li {
       margin-bottom: 8px;
     }
+    .math-box {
+      background: #f6f8fa;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 12px 16px;
+      font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+      font-size: 0.9rem;
+      overflow-x: auto;
+      margin: 14px 0;
+    }
+    .btn-download {
+      display: inline-block;
+      margin-top: 20px;
+      margin-bottom: 40px;
+      padding: 10px 18px;
+      background-color: #24292e;
+      color: #ffffff;
+      border-radius: 6px;
+      font-weight: 500;
+      text-decoration: none;
+    }
+    .btn-download:hover {
+      background-color: #000000;
+      color: #ffffff;
+      text-decoration: none;
+    }
     a {
       color: var(--link);
       text-decoration: none;
-    }
-    a:hover {
-      text-decoration: underline;
     }
   </style>
 </head>
@@ -127,32 +151,65 @@
     <div class="dropdown">
       <button class="dropdown-btn">Projects &#9662;</button>
       <div class="dropdown-menu">
-        <a href="project-1.html">Project One Title</a>
-        <a href="project-2.html">Project Two Title</a>
-        <a href="project-3.html">Project Three Title</a>
+        <a href="project-1.html">Master's Thesis (Aspirations & Inverted-U)</a>
+        <a href="project-2.html">Decision Theory & Predictive Modeling</a>
+        <a href="project-3.html">Regional Asset Valuation (MIDS)</a>
+        <a href="project-4.html">Bachelor's Thesis (NSS Liquidity)</a>
       </div>
     </div>
   </nav>
 
-  <h1>Project One Title</h1>
-  <div class="meta">Institution / Context | Timeline Placeholder</div>
+  <h1>Aspirations, Investment, and the Inverted-U</h1>
+  <div class="meta">
+    Master's Thesis | Alfred Weber Institute, Heidelberg University | November 2025
+  </div>
 
   <div>
-    <span class="tag">Method/Tool 1</span>
-    <span class="tag">Method/Tool 2</span>
+    <span class="tag">Behavioral Economics</span>
+    <span class="tag">Reference-Dependent Preferences</span>
+    <span class="tag">Loss Aversion</span>
+    <span class="tag">Microeconometrics</span>
+    <span class="tag">IFLS Microdata</span>
+    <span class="tag">R / Stata</span>
   </div>
 
   <h2>Overview</h2>
-  <p>Detailed narrative placeholder explaining the core question or business problem this project tackled.</p>
+  <p>
+    This thesis models and empirically tests how forward-looking reference points ("aspirations") influence household capital allocation and investment decisions[cite: 6]. Building on the foundational framework of Genicot and Ray (2017), the study analyzes how the gap between a household's current resources and its future target dictates economic effort[cite: 6, 7]. The model establishes a theoretical mechanism producing an <strong>inverted-U relationship</strong> between aspirations and investment, which is subsequently validated using microdata on educational expenditures[cite: 7, 8].
+  </p>
 
-  <h2>Methodology & Implementation</h2>
+  <h2>Theoretical Framework</h2>
+  <p>
+    Households allocate income between current consumption and investment under an AK production technology[cite: 6]. Preferences are characterized by Constant Relative Risk Aversion (CRRA) utility integrated with reference-dependent gains and losses relative to an exogenous aspiration scalar[cite: 6]:
+  </p>
+  
+  <div class="math-box">
+    U(c, k, a) = u(c) + &delta; [ w<sub>0</sub>(f(k)) + &pi;<sub>G</sub> W<sub>G</sub>((f(k) - a)<sub>+</sub>) - &pi;<sub>L</sub> W<sub>L</sub>((a - f(k))<sub>+</sub>) ]
+  </div>
+
+  <p>
+    Where &pi;<sub>L</sub> &gt; &pi;<sub>G</sub> captures loss aversion from falling short of aspirations[cite: 6, 7]. Under ratio normalization, the household optimization problem partitions into two distinct behavioural regimes[cite: 7]:
+  </p>
   <ul>
-    <li>Data acquisition, extraction, and cleaning pipeline description placeholder.</li>
-    <li>Statistical, machine learning, or econometric modeling setup placeholder.</li>
+    <li><strong>Satisfied Regime (g &ge; r):</strong> When the aspiration ratio is within achievable bounds, increasing aspirations raises marginal utility and encourages investment effort (&part;g/&part;r &gt; 0)[cite: 7].</li>
+    <li><strong>Frustrated Regime (g &lt; r):</strong> When aspirations exceed a critical threshold r*, the target becomes unattainable; further increases in aspirations induce frustration, depressing investment incentives (&part;g/&part;r &lt; 0)[cite: 7].</li>
+  </ul>
+  <p>
+    Together, these regimes generate an inverted-U investment profile: moderate aspirations stimulate savings and human capital accumulation, whereas excessive aspiration gaps depress effort[cite: 7].
+  </p>
+
+  <h2>Empirical Strategy & Key Findings</h2>
+  <p>
+    The non-linear prediction was tested empirically using household survey records from the Indonesian Family Life Survey (IFLS), estimating the effect of the aspirations ratio on per-capita education expenditure[cite: 4, 8]:
+  </p>
+  <ul>
+    <li><strong>Econometric Specification:</strong> Evaluated using quadratic specifications alongside demographic controls, household asset levels, parental education, and kecamatan (sub-district) fixed effects with standard errors clustered at the enumeration area level[cite: 8].</li>
+    <li><strong>Empirical Confirmation:</strong> Across all model specifications, the linear aspirations ratio enters with a positive coefficient (&beta; &approx; +34.5 to +35.4, p &lt; 0.01), while the quadratic term is negative and statistically significant (&beta; &approx; -3.95 to -4.33, p &lt; 0.05)[cite: 8].</li>
+    <li><strong>Conclusion:</strong> Household educational investment responds non-monotonically to aspiration gaps, providing direct empirical evidence for the inverted-U hypothesis in developing economies[cite: 7, 8].</li>
   </ul>
 
-  <h2>Results & Deliverables</h2>
-  <p>Key findings, empirical results, or links to code / papers placeholder.</p>
+  <!-- PDF Download Attachment -->
+  <a href="thesis.pdf" download class="btn-download">&#8595; Download Thesis PDF</a>
 
 </body>
 </html>
