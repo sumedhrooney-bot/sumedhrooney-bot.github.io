@@ -10,7 +10,7 @@
     window.MathJax = {
       tex: {
         inlineMath: [['\\(', '\\)']],
-        displayMath: [['$$', '$$'], ['\\[', '\\]']]
+        displayMath: [['$$', '$$'], ['[', ']']]
       },
       svg: {
         fontCache: 'global'
@@ -205,10 +205,8 @@
 
   <div>
     <span class="tag">Machine Learning Optimization</span>
-    <span class="tag">Asymmetric Loss Formulation</span>
     <span class="tag">Feature Engineering</span>
-    <span class="tag">Non Linear Regression</span>
-    <span class="tag">High Dimensional Categorical Controls</span>
+    <span class="tag">Non Linear Regression</span>    
     <span class="tag">R / Stata / Python</span>
   </div>
 
@@ -219,7 +217,7 @@
   <!-- Section 1 -->
   <h2>Objective Function and System Constraints</h2>
   <p>
-    I model household investment decisions as a constrained non linear optimization problem. Each agent starts with a scalar resource endowment \(y &gt; 0\) and determines the optimal resource allocation between current consumption \(c\) and capital investment \(k\)[cite: 35]. Investment yields a next period return \(z = f(k)\) governed by a linear capital production kernel \(f(k) = \rho k = z\) with productivity parameter \(\rho &gt; 1\)[cite: 35, 36]. The budget constraint is defined as[cite: 35]:
+    I model household investment decisions as a constrained non linear optimization problem. Each agent starts with a scalar resource endowment \(y &gt; 0\) and determines the optimal resource allocation between current consumption \(c\) and capital investment \(k\). Investment yields a next period return \(z = f(k)\) governed by a linear capital production kernel \(f(k) = \rho k = z\) with productivity parameter \(\rho &gt; 1\). The budget constraint is defined as:
   </p>
 
   <div class="math-block">
@@ -227,7 +225,7 @@
   </div>
 
   <p>
-    I define an asymmetric reference dependent utility objective anchored around a forward target \(a\)[cite: 35]. The objective balances baseline consumption, future expected capital return, and a piecewise gain loss penalty term[cite: 35]:
+    I define an asymmetric reference dependent utility objective anchored around a forward target \(a\). The objective balances baseline consumption, future expected capital return, and a piecewise gain loss penalty term:
   </p>
 
   <div class="math-block">
@@ -235,13 +233,13 @@
   </div>
 
   <p>
-    Here \(u\), \(w_0\), \(W_G\), and \(W_L\) are concave mappings with common curvature \(\sigma \in (0, 1)\), \(\delta &gt; 0\) represents the discount weight, and \(\pi_L &gt; \pi_G \ge 0\) imposes an asymmetric penalty structure where target shortfalls are penalized more severely than target gains[cite: 35, 36].
+    Here \(u\), \(w_0\), \(W_G\), and \(W_L\) are concave mappings with common curvature \(\sigma \in (0, 1)\), \(\delta &gt; 0\) represents the discount weight, and \(\pi_L &gt; \pi_G \ge 0\) imposes an asymmetric penalty structure where target shortfalls are penalized more severely than target gains.
   </p>
 
   <!-- Section 2 -->
   <h2>Scale Normalization and Analytical Regimes</h2>
   <p>
-    To make decision variables scale invariant across agents, I normalize variables into continuous ratios: the growth factor \(g = z / y\), the aspirations ratio \(r = a / y\), and the investment share \(i = k / y = g / \rho\)[cite: 36]. This transforms the system into maximizing the following reduced piecewise objective[cite: 36]:
+    To make decision variables scale invariant across agents, I normalize variables into continuous ratios: the growth factor \(g = z / y\), the aspirations ratio \(r = a / y\), and the investment share \(i = k / y = g / \rho\). This transforms the system into maximizing the following reduced piecewise objective:
   </p>
 
   <div class="math-block">
@@ -249,18 +247,18 @@
   </div>
 
   <p>
-    First order optimization conditions partition the agent parameter space into two distinct operating regimes around an optimal bifurcation threshold \(r^* &gt; 1\)[cite: 36, 37]:
+    First order optimization conditions partition the agent parameter space into two distinct operating regimes around an optimal bifurcation threshold \(r^* &gt; 1\):
   </p>
   <ul>
     <li>
-      <strong>Satisfied Regime \( (g \ge r) \) for \( r \le r^* \):</strong> The target is mathematically accessible within the agent budget envelope[cite: 36, 37]. The first order condition evaluates along the positive reward domain, resulting in a positive gradient \(\partial g^* / \partial r &gt; 0\) where higher aspiration goals incentivize greater capital allocation[cite: 37].
+      <strong>Satisfied Regime \((g \ge r)\) for \(r \le r^*\):</strong> The target is mathematically accessible within the agent budget envelope. The first order condition evaluates along the positive reward domain, resulting in a positive gradient \(\partial g^* / \partial r &gt; 0\) where higher aspiration goals incentivize greater capital allocation.
     </li>
     <li>
-      <strong>Frustrated Regime \( (g &lt; r) \) for \( r &gt; r^* \):</strong> When the target ratio exceeds threshold \(r^*\), attaining it demands an unsustainable sacrifice of base consumption[cite: 36, 37]. The loss penalty dominates, causing a negative gradient \(\partial g^* / \partial r &lt; 0\) where excessive target distance causes an abandonment effect and depresses investment[cite: 37].
+      <strong>Frustrated Regime \((g &lt; r)\) for \(r &gt; r^*\):</strong> When the target ratio exceeds threshold \(r^*\), attaining it demands an unsustainable sacrifice of base consumption. The loss penalty dominates, causing a negative gradient \(\partial g^* / \partial r &lt; 0\) where excessive target distance causes an abandonment effect and depresses investment.
     </li>
   </ul>
   <p>
-    Combining both regimes produces a global inverted U topology for equilibrium investment[cite: 37]:
+    Combining both regimes produces a global inverted U topology for equilibrium investment:
   </p>
 
   <div class="math-block">
@@ -270,7 +268,7 @@
   <!-- Section 3 -->
   <h2>Feature Engineering and Regression Specification</h2>
   <p>
-    I trained and validated this model on longitudinal microdata from the Indonesian Family Life Survey (IFLS 5, \(N = 4{,}651\))[cite: 38, 49]. To measure household capital allocation, I engineered a continuous target variable[cite: 46]:
+    I trained and validated this model on longitudinal microdata from the Indonesian Family Life Survey (IFLS 5, \(N = 4{,}651\)). To measure household capital allocation, I engineered a continuous target variable:
   </p>
 
   <div class="math-block">
@@ -278,7 +276,7 @@
   </div>
 
   <p>
-    Using survey responses where individuals evaluate their current position on a 1 to 6 economic ladder alongside their expected position 5 years in the future, I constructed the continuous aspirations ratio feature[cite: 40, 41]:
+    Using survey responses where individuals evaluate their current position on a 1 to 6 economic ladder alongside their expected position 5 years in the future, I constructed the continuous aspirations ratio feature:
   </p>
 
   <div class="math-block">
@@ -286,7 +284,7 @@
   </div>
 
   <p>
-    To model non linearity and eliminate spatial confounding from unobserved community infrastructure, I estimated a quadratic polynomial specification combined with high dimensional Kecamatan neighborhood fixed effects and cluster robust standard errors at the enumeration area level[cite: 45, 46]:
+    To model non linearity and eliminate spatial confounding from unobserved community infrastructure, I estimated a quadratic polynomial specification combined with high dimensional Kecamatan neighborhood fixed effects and cluster robust standard errors at the enumeration area level:
   </p>
 
   <div class="math-block">
@@ -334,24 +332,13 @@
         <td>0.08852</td>
       </tr>
     </tbody>
-  </table>[cite: 49]
+  </table>
 
   <!-- Section 4 -->
   <h2>Model Evaluation and Quantitative Insights</h2>
   <ul>
     <li>
-      <strong>Non Linear Validation:</strong> In the full model, the linear coefficient is positive and statistically significant (\(\beta_1 = 34.518\), \(p &lt; 0.01\)) while the quadratic penalty term is negative and statistically significant (\(\beta_2 = -4.334\), \(p &lt; 0.05\))[cite: 47, 49]. A Wald test confirms joint significance (\(F = 5.300\), \(p = 0.005\)), empirically validating the non linear inverted U curve[cite: 47, 66].
+      <strong>Non Linear Validation:</strong> In the full model, the linear coefficient is positive and statistically significant (\(\beta_1 = 34.518\), \(p &lt; 0.01\)) while the quadratic penalty term is negative and statistically significant (\(\beta_2 = -4.334\), \(p &lt; 0.05\)). A Wald test confirms joint significance (\(F = 5.300\), \(p = 0.005\)), empirically validating the non linear inverted U curve.
     </li>
     <li>
-      <strong>Optimal Inflection Boundary:</strong> Solving the derivative \(\frac{\partial y_h}{\partial r_h} = \beta_1 + 2\beta_2 r_h = 34.518 - 8.668 r_h = 0\) identifies the inflection boundary at \(r^* = -\frac{\beta_1}{2\beta_2} \approx 3.98\)[cite: 47]. Moving the aspirations ratio from 1 to 2 produces a 26 percent increase in investment, while expanding targets beyond a ratio of 4 causes motivation breakdown and reduces expenditure[cite: 47].
-    </li>
-    <li>
-      <strong>Subsample and Normalization Checks:</strong> Evaluating a normalized dependent variable scaled by initial ladder rank (\(y_h = 100 \times \log(\text{expenditure} / \text{step})\)) yields an identical turning point at \(r^* \approx 4\)[cite: 48, 51]. When restricted to moderate aspirers on ladder steps 3 to 5, the response curve stays strictly in the satisfied domain, yielding a positive linear response (\(\beta = 27.473\), \(p &lt; 0.01\))[cite: 57, 58].
-    </li>
-  </ul>
-
-  <!-- Download Link -->
-  <a href="thesis.pdf" download class="btn-download">&#8595; Download Thesis PDF</a>
-
-</body>
-</html>
+      <strong>Optimal Inflection Boundary:</strong> Solving the derivative \(\frac{\partial y_h}{\partial r_h} = \beta_1 + 2\beta_2 r_h = 34.518 - 8.668 r_h = 0\) identifies the inflection boundary at \(r^* = -\frac{\beta_1}{2\beta_2} \approx 3.98\). Moving the aspirations ratio from 1 to 2 produces a 26 percent increase in investment, while expanding targets beyond a ratio of 4 causes motivation breakdown
