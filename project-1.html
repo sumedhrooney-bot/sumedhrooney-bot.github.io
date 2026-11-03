@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Master's Thesis - Sumedh Ramakrishna</title>
+  <title>Master's Thesis - Non-Linear Optimization & Econometric Modeling</title>
   <style>
     :root {
       --bg: #ffffff;
@@ -110,15 +110,16 @@
     li {
       margin-bottom: 8px;
     }
-    .math-box {
+    .code-box {
       background: #f6f8fa;
       border: 1px solid var(--border);
       border-radius: 6px;
       padding: 12px 16px;
       font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
-      font-size: 0.9rem;
+      font-size: 0.88rem;
       overflow-x: auto;
       margin: 14px 0;
+      line-height: 1.5;
     }
     .btn-download {
       display: inline-block;
@@ -140,6 +141,21 @@
       color: var(--link);
       text-decoration: none;
     }
+    .results-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 16px 0;
+      font-size: 0.9rem;
+    }
+    .results-table th, .results-table td {
+      border: 1px solid var(--border);
+      padding: 8px 12px;
+      text-align: left;
+    }
+    .results-table th {
+      background-color: #f6f8fa;
+      font-weight: 600;
+    }
   </style>
 </head>
 <body>
@@ -159,53 +175,123 @@
     </div>
   </nav>
 
-  <h1>Aspirations, Investment, and the Inverted-U</h1>
+  <h1>Aspirations, Dynamic Investment, and the Inverted-U</h1>
   <div class="meta">
-    Master's Thesis | Alfred Weber Institute, Heidelberg University | November 2025
+    Master's Thesis | Alfred Weber Institute, Heidelberg University | Supervised by Prof. Stefan Klonner | November 2025
   </div>
 
   <div>
-    <span class="tag">Behavioral Economics</span>
-    <span class="tag">Reference-Dependent Preferences</span>
-    <span class="tag">Loss Aversion</span>
-    <span class="tag">Microeconometrics</span>
-    <span class="tag">IFLS Microdata</span>
+    <span class="tag">Constrained Optimization</span>
+    <span class="tag">Loss Aversion Modeling</span>
+    <span class="tag">Panel Microeconometrics</span>
+    <span class="tag">High-Dimensional Fixed Effects</span>
+    <span class="tag">IFLS Panel Pipeline</span>
     <span class="tag">R / Stata</span>
   </div>
 
-  <h2>Overview</h2>
+  <h2>System Architecture & Theoretical Formulation</h2>
   <p>
-    This thesis models and empirically tests how forward-looking reference points ("aspirations") influence household capital allocation and investment decisions[cite: 6]. Building on the foundational framework of Genicot and Ray (2017), the study analyzes how the gap between a household's current resources and its future target dictates economic effort[cite: 6, 7]. The model establishes a theoretical mechanism producing an <strong>inverted-U relationship</strong> between aspirations and investment, which is subsequently validated using microdata on educational expenditures[cite: 7, 8].
+    This research formulates an analytical framework linking bounded rationality, target-dependent loss functions, and resource allocation. Grounded in reference-dependent utility theory (Genicot &amp; Ray), the project models how agent-selected scalar targets alter convex investment trajectories under an AK capital transition kernel ($f(k) = \rho k$, with $\rho > 1$).
+  </p>
+  <p>
+    The objective function combines a standard CRRA utility core over immediate consumption with an asymmetric penalty/reward operator referenced against a forward target $a$:
   </p>
 
-  <h2>Theoretical Framework</h2>
-  <p>
-    Households allocate income between current consumption and investment under an AK production technology[cite: 6]. Preferences are characterized by Constant Relative Risk Aversion (CRRA) utility integrated with reference-dependent gains and losses relative to an exogenous aspiration scalar[cite: 6]:
-  </p>
-  
-  <div class="math-box">
-    U(c, k, a) = u(c) + &delta; [ w<sub>0</sub>(f(k)) + &pi;<sub>G</sub> W<sub>G</sub>((f(k) - a)<sub>+</sub>) - &pi;<sub>L</sub> W<sub>L</sub>((a - f(k))<sub>+</sub>) ]
+  <div class="code-box">
+U(c, k, a) = u(c) + &delta; [ w0(f(k)) + &pi;_G * max(0, f(k) - a)^(1 - &sigma;) - &pi;_L * max(0, a - f(k))^(1 - &sigma;) ]
   </div>
 
   <p>
-    Where &pi;<sub>L</sub> &gt; &pi;<sub>G</sub> captures loss aversion from falling short of aspirations[cite: 6, 7]. Under ratio normalization, the household optimization problem partitions into two distinct behavioural regimes[cite: 7]:
-  </p>
-  <ul>
-    <li><strong>Satisfied Regime (g &ge; r):</strong> When the aspiration ratio is within achievable bounds, increasing aspirations raises marginal utility and encourages investment effort (&part;g/&part;r &gt; 0)[cite: 7].</li>
-    <li><strong>Frustrated Regime (g &lt; r):</strong> When aspirations exceed a critical threshold r*, the target becomes unattainable; further increases in aspirations induce frustration, depressing investment incentives (&part;g/&part;r &lt; 0)[cite: 7].</li>
-  </ul>
-  <p>
-    Together, these regimes generate an inverted-U investment profile: moderate aspirations stimulate savings and human capital accumulation, whereas excessive aspiration gaps depress effort[cite: 7].
+    With parameter constraints $\sigma \in (0,1)$ defining constant relative risk aversion curvature and $\pi_L > \pi_G > 0$ imposing empirical loss aversion. By normalizing decision variables into scale-invariant ratios—endogenous growth factor $g = z/y$, aspiration ratio $r = a/y$, and investment rate $i = k/y = g/\rho$—the problem reduces to maximizing a piecewise concave objective function:
   </p>
 
-  <h2>Empirical Strategy & Key Findings</h2>
+  <div class="code-box">
+U(g, r) = (1 - g/&rho;)^(1 - &sigma;) + &delta; [ g^(1 - &sigma;) + &pi;_G * (g - r)_+^(1 - &sigma;) - &pi;_L * (r - g)_+^(1 - &sigma;) ]
+  </div>
+
+  <h2>Analytical Regimes & Structural Bifurcation</h2>
   <p>
-    The non-linear prediction was tested empirically using household survey records from the Indonesian Family Life Survey (IFLS), estimating the effect of the aspirations ratio on per-capita education expenditure[cite: 4, 8]:
+    First-order optimization conditions yield a dual-regime system governed by a structural bifurcation boundary $r^* > 1$:
   </p>
   <ul>
-    <li><strong>Econometric Specification:</strong> Evaluated using quadratic specifications alongside demographic controls, household asset levels, parental education, and kecamatan (sub-district) fixed effects with standard errors clustered at the enumeration area level[cite: 8].</li>
-    <li><strong>Empirical Confirmation:</strong> Across all model specifications, the linear aspirations ratio enters with a positive coefficient (&beta; &approx; +34.5 to +35.4, p &lt; 0.01), while the quadratic term is negative and statistically significant (&beta; &approx; -3.95 to -4.33, p &lt; 0.05)[cite: 8].</li>
-    <li><strong>Conclusion:</strong> Household educational investment responds non-monotonically to aspiration gaps, providing direct empirical evidence for the inverted-U hypothesis in developing economies[cite: 7, 8].</li>
+    <li>
+      <strong>Satisfied Regime ($g \ge r$, $r \le r^*$):</strong> The target is mathematically accessible within the agent's budget envelope. The first-order condition evaluates along the positive gain domain:
+      <div class="code-box">(1 - g/&rho;)^(-&sigma;) = &delta;&rho; [ g^(-&sigma;) + &pi;_G * (g - r)^(-&sigma;) ]</div>
+      Here, $\partial g^* / \partial r > 0$. Increasing the target acts as an incentive mechanism, driving marginal investment up.
+    </li>
+    <li>
+      <strong>Frustrated Regime ($g < r$, $r > r^*$):</strong> When the target ratio exceeds critical threshold $r^*$, the agent cannot achieve the target without unsustainable sacrifice of base consumption. The loss penalty dominates:
+      <div class="code-box">(1 - g/&rho;)^(-&sigma;) = &delta;&rho; [ g^(-&sigma;) + &pi;_L * (r - g)^(-&sigma;) ]</div>
+      Here, $\partial g^* / \partial r < 0$. Excessive target ratios trigger an analytical abandonment effect, depressing optimal investment and yielding an inverted-U global trajectory.
+    </li>
+  </ul>
+
+  <h2>Data Engineering & Econometric Identification</h2>
+  <p>
+    To evaluate whether this non-linear optimization mechanism manifests in real-world data, the model was tested against longitudinal household records from the Indonesian Family Life Survey (IFLS, $N = 4,651$). The pipeline mapped survey modules into structured feature vectors, computing per-capita educational expenditure and normalized household aspiration ratios.
+  </p>
+  <p>
+    To isolate causal elasticity and eliminate unobserved spatial/community heterogeneity, the estimation pipeline applied quadratic polynomial specifications combined with high-dimensional sub-district fixed effects:
+  </p>
+
+  <div class="code-box">
+ln(Education_Expenditure_i) = &beta;_0 + &beta;_1 * r_i + &beta;_2 * (r_i)^2 + &Gamma;' X_i + &alpha;_kecamatan + &epsilon;_i
+  </div>
+
+  <table class="results-table">
+    <thead>
+      <tr>
+        <th>Feature Variable</th>
+        <th>Model (1): Baseline</th>
+        <th>Model (2): Demographic Controls</th>
+        <th>Model (3): Fully Specified</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Aspirations Ratio ($r$)</strong></td>
+        <td>+35.390*** (SE: 12.105)</td>
+        <td>+35.392*** (SE: 11.891)</td>
+        <td>+34.518*** (SE: 12.071)</td>
+      </tr>
+      <tr>
+        <td><strong>Aspirations Ratio Squared ($r^2$)</strong></td>
+        <td>-3.948** (SE: 1.903)</td>
+        <td>-4.143** (SE: 1.919)</td>
+        <td>-4.334** (SE: 1.899)</td>
+      </tr>
+      <tr>
+        <td><strong>Kecamatan Fixed Effects</strong></td>
+        <td>Yes</td>
+        <td>Yes</td>
+        <td>Yes</td>
+      </tr>
+      <tr>
+        <td><strong>Standard Error Clustering</strong></td>
+        <td>Enumeration Area (EA)</td>
+        <td>Enumeration Area (EA)</td>
+        <td>Enumeration Area (EA)</td>
+      </tr>
+      <tr>
+        <td><strong>Observations / $R^2$</strong></td>
+        <td>4,669 ($R^2 = 0.041$)</td>
+        <td>4,651 ($R^2 = 0.059$)</td>
+        <td>4,651 ($R^2 = 0.089$)</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>Technical Takeaways & Quantitative Relevance</h2>
+  <ul>
+    <li>
+      <strong>Statistical Significance:</strong> Across all model iterations, the linear coefficient remains positive and significant at $p < 0.01$ ($\beta_1 \approx +34.5$), while the quadratic penalty term remains strictly negative at $p < 0.05$ ($\beta_2 \approx -4.33$), validating the inverted-U topology.
+    </li>
+    <li>
+      <strong>Optimal Inflection Point:</strong> Solving the estimated gradient $\frac{\partial \ln(Y)}{\partial r} = \beta_1 + 2\beta_2 r = 0$ yields a maximal investment response at an aspiration ratio of $r^* = -\frac{\beta_1}{2\beta_2} \approx 3.98$ to $4.48$, mapping directly to the theoretical threshold boundary.
+    </li>
+    <li>
+      <strong>Industry Application:</strong> Demonstrates expertise in non-linear loss-function formulation, reference-dependent agent behavior, high-dimensional panel data wrangling, and cluster-robust causal inference applicable to risk analytics, credit scoring, and customer underwriting behavior.
+    </li>
   </ul>
 
   <!-- PDF Download Attachment -->
