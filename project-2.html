@@ -3,7 +3,22 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Project One - Details</title>
+  <title>Deep Sequence Modeling for Emotion Classification - Sumedh Ramakrishna</title>
+
+  <!-- MathJax Configuration -->
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']]
+      },
+      svg: {
+        fontCache: 'global'
+      }
+    };
+  </script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
   <style>
     :root {
       --bg: #ffffff;
@@ -14,10 +29,10 @@
     }
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      line-height: 1.6;
+      line-height: 1.65;
       color: var(--text);
       background-color: var(--bg);
-      max-width: 750px;
+      max-width: 760px;
       margin: 40px auto;
       padding: 0 20px;
     }
@@ -56,7 +71,7 @@
       top: 100%;
       left: 0;
       background-color: var(--bg);
-      min-width: 200px;
+      min-width: 280px;
       border: 1px solid var(--border);
       border-radius: 6px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.08);
@@ -68,6 +83,7 @@
       padding: 8px 16px;
       color: var(--text);
       border-bottom: none;
+      font-size: 0.95rem;
     }
     .dropdown-menu a:hover {
       background-color: #f6f8fa;
@@ -77,13 +93,14 @@
       display: block;
     }
     h1 {
-      font-size: 1.8rem;
-      margin-bottom: 6px;
+      font-size: 1.75rem;
+      line-height: 1.3;
+      margin-bottom: 8px;
     }
     .meta {
       color: var(--muted);
       font-size: 0.95rem;
-      margin-bottom: 20px;
+      margin-bottom: 16px;
     }
     .tag {
       display: inline-block;
@@ -100,8 +117,8 @@
       font-size: 1.25rem;
       border-bottom: 1px solid var(--border);
       padding-bottom: 6px;
-      margin-top: 24px;
-      margin-bottom: 12px;
+      margin-top: 32px;
+      margin-bottom: 14px;
     }
     ul {
       padding-left: 20px;
@@ -109,12 +126,44 @@
     li {
       margin-bottom: 8px;
     }
-    a {
-      color: var(--link);
-      text-decoration: none;
+    .results-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+      font-size: 0.9rem;
     }
-    a:hover {
-      text-decoration: underline;
+    .results-table th, .results-table td {
+      border: 1px solid var(--border);
+      padding: 8px 12px;
+      text-align: left;
+    }
+    .results-table th {
+      background-color: #f6f8fa;
+      font-weight: 600;
+    }
+    .figure-container {
+      margin: 24px 0;
+      text-align: center;
+    }
+    .figure-container img {
+      width: 100%;
+      max-width: 720px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      background-color: #ffffff;
+    }
+    .figure-caption {
+      font-size: 0.88rem;
+      color: var(--muted);
+      margin-top: 8px;
+    }
+    .math-block {
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 12px 16px;
+      margin: 16px 0;
+      overflow-x: auto;
     }
   </style>
 </head>
@@ -127,32 +176,158 @@
     <div class="dropdown">
       <button class="dropdown-btn">Projects &#9662;</button>
       <div class="dropdown-menu">
-        <a href="project-1.html">Project One Title</a>
-        <a href="project-2.html">Project Two Title</a>
-        <a href="project-3.html">Project Three Title</a>
+        <a href="project-1.html">Master's Thesis</a>
+        <a href="project-2.html">Deep Sequence Modeling (NLP)</a>
+        <a href="project-3.html">Regional Asset Valuation (MIDS)</a>
+        <a href="project-4.html">Bachelor's Thesis (NSS Liquidity)</a>
       </div>
     </div>
   </nav>
 
-  <h1>Project One Title</h1>
-  <div class="meta">Institution / Context | Timeline Placeholder</div>
-
-  <div>
-    <span class="tag">Method/Tool 1</span>
-    <span class="tag">Method/Tool 2</span>
+  <!-- Title & Metadata -->
+  <h1>Deep Sequence Modeling for Multi-Class Emotion Classification</h1>
+  <div class="meta">
+    Sumedh Ramakrishna | Natural Language Processing &amp; Applied Deep Learning Pipeline | TensorFlow &amp; Hugging Face
   </div>
 
+  <div>
+    <span class="tag">TensorFlow / Keras</span>
+    <span class="tag">Bidirectional LSTM</span>
+    <span class="tag">Sequence Embedding</span>
+    <span class="tag">Hugging Face Datasets</span>
+    <span class="tag">Multi-Class Classification</span>
+    <span class="tag">Early Stopping Regularization</span>
+  </div>
+
+  <!-- Overview -->
   <h2>Overview</h2>
-  <p>Detailed narrative placeholder explaining the core question or business problem this project tackled.</p>
+  <p>
+    This project implements an end-to-end recurrent deep learning architecture designed to detect fine-grained affective states from uncurated microblog sequences. Utilizing the benchmark <code>dair-ai/emotion</code> corpus, the model classifies short texts into six distinct emotional topologies: <em>sadness</em>, <em>joy</em>, <em>love</em>, <em>anger</em>, <em>fear</em>, and <em>surprise</em>. The engineering objective was to stabilize recurrent gradient flows, mitigate rapid over-parameterization memorization, and deliver high class-conditional discrimination.
+  </p>
 
-  <h2>Methodology & Implementation</h2>
+  <!-- Model Architecture -->
+  <h2>System Architecture &amp; Regularization Dynamics</h2>
+  <p>
+    Raw tweet text was tokenized over a fixed sub-word vocabulary cutoff ($V = 10{,}000$) with uniform truncation and post-padding to a sequence boundary of $L = 50$. Word representations were mapped into a continuous dense space via an embedding matrix $E \in \mathbb{R}^{V \times 64}$.
+  </p>
+  <p>
+    Contextual representations were extracted using a stacked two-layer Bidirectional Long Short-Term Memory (BiLSTM) network with hidden cell dimension $d_h = 32$. To counter overfitting inherent to sequential text modeling, both variational input dropout and recurrent state dropout were fixed at $p = 0.2$ across both recurrent gates:
+  </p>
+
+  <div class="math-block">
+    $$\vec{h}_t = \text{LSTM}(\vec{x}_t, \vec{h}_{t-1}), \quad \overleftarrow{h}_t = \text{LSTM}(\vec{x}_t, \overleftarrow{h}_{t+1}), \quad \mathbf{H}_t = [\vec{h}_t \,\|\, \overleftarrow{h}_t] \in \mathbb{R}^{64}$$
+  </div>
+
+  <p>
+    The terminal hidden states were channeled into a fully connected classification projection with non-linear ReLU activation, an additional dropout bottleneck layer ($p = 0.3$), and a 6-dimensional Softmax output layer trained under Sparse Categorical Cross-Entropy:
+  </p>
+
+  <div class="math-block">
+    $$\mathcal{L} = -\sum_{k=1}^{K} y_k \log(\hat{y}_k), \quad K = 6$$
+  </div>
+
+  <!-- Training Figures -->
+  <h2>Empirical Convergence &amp; Validation Trajectory</h2>
+  <p>
+    The model was optimized using Adam with a calibrated learning rate ($\alpha = 10^{-3}$) and mini-batch sizes of 32. Convergence was monitored against validation loss using an early stopping trigger with weight restoration to capture the global minimum before memorization degradation.
+  </p>
+
+  <div class="figure-container">
+    <img src="training_curves.png" alt="Training and Validation Accuracy and Loss Curves">
+    <div class="figure-caption">Figure 1: Training vs. Validation dynamics across epochs. Loss stabilizes at epoch 4-6, with validation accuracy achieving ~90.6%.</div>
+  </div>
+
+  <p>
+    As illustrated above, training accuracy advanced steadily from 45.7% (Epoch 1) to 95.3% (Epoch 6), while validation loss dropped sharply from 0.780 to plateau cleanly around 0.321-0.327 with no divergence, proving effective structural regularization.
+  </p>
+
+  <!-- Performance Metrics -->
+  <h2>Test Set Evaluation &amp; Confusion Topology</h2>
+  <p>
+    On the unseen test split ($N = 2{,}000$), the trained model achieved an overall <strong>Test Accuracy of 90.45%</strong> with a weighted macro F1-score of 0.90.
+  </p>
+
+  <table class="results-table">
+    <thead>
+      <tr>
+        <th>Target Emotion</th>
+        <th>Precision</th>
+        <th>Recall</th>
+        <th>F1-Score</th>
+        <th>Support ($N$)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Sadness</strong></td>
+        <td>0.96</td>
+        <td>0.96</td>
+        <td>0.96</td>
+        <td>581</td>
+      </tr>
+      <tr>
+        <td><strong>Joy</strong></td>
+        <td>0.93</td>
+        <td>0.93</td>
+        <td>0.93</td>
+        <td>695</td>
+      </tr>
+      <tr>
+        <td><strong>Love</strong></td>
+        <td>0.75</td>
+        <td>0.74</td>
+        <td>0.74</td>
+        <td>159</td>
+      </tr>
+      <tr>
+        <td><strong>Anger</strong></td>
+        <td>0.91</td>
+        <td>0.88</td>
+        <td>0.89</td>
+        <td>275</td>
+      </tr>
+      <tr>
+        <td><strong>Fear</strong></td>
+        <td>0.83</td>
+        <td>0.95</td>
+        <td>0.88</td>
+        <td>224</td>
+      </tr>
+      <tr>
+        <td><strong>Surprise</strong></td>
+        <td>0.75</td>
+        <td>0.55</td>
+        <td>0.63</td>
+        <td>66</td>
+      </tr>
+      <tr>
+        <td><strong>Overall Accuracy</strong></td>
+        <td>-</td>
+        <td>-</td>
+        <td><strong>0.90</strong></td>
+        <td><strong>2,000</strong></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="figure-container">
+    <img src="confusion_matrix.png" alt="Normalized Confusion Matrix">
+    <div class="figure-caption">Figure 2: Normalized confusion matrix across emotion targets, illustrating strong diagonal isolation with localized semantic bleed between Joy and Love.</div>
+  </div>
+
+  <!-- Key Insights -->
+  <h2>Quantitative Takeaways</h2>
   <ul>
-    <li>Data acquisition, extraction, and cleaning pipeline description placeholder.</li>
-    <li>Statistical, machine learning, or econometric modeling setup placeholder.</li>
+    <li>
+      <strong>Affective Dominance:</strong> High class-conditional separation was observed on primary baseline classes, with <em>Sadness</em> achieving 0.96 F1 and <em>Joy</em> achieving 0.93 F1, demonstrating robust bi-directional phrase boundary encoding.
+    </li>
+    <li>
+      <strong>Error Distribution:</strong> As identified in the confusion matrix, primary classification leakage occurs along semantically adjacent boundaries (e.g., <em>Love</em> samples projecting into the broader <em>Joy</em> subspace, and <em>Surprise</em> exhibiting lower recall due to support sparsity in microblog distributions).
+    </li>
+    <li>
+      <strong>Production Scalability:</strong> The compact model footprint (under 750k parameters) achieves high multi-class precision without requiring multi-billion parameter transformer backbones, suitable for lightweight low-latency production pipelines.
+    </li>
   </ul>
-
-  <h2>Results & Deliverables</h2>
-  <p>Key findings, empirical results, or links to code / papers placeholder.</p>
 
 </body>
 </html>
