@@ -149,6 +149,13 @@
       background-color: #f6f8fa;
       font-weight: 600;
     }
+    .highlight-card {
+      background: #f6f8fa;
+      border-left: 4px solid #0366d6;
+      padding: 12px 16px;
+      margin: 18px 0;
+      font-size: 0.95rem;
+    }
     .btn-download {
       display: inline-block;
       margin-top: 24px;
@@ -164,6 +171,13 @@
       background-color: #000000;
       color: #ffffff;
       text-decoration: none;
+    }
+    a {
+      color: var(--link);
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
     }
   </style>
 </head>
@@ -190,58 +204,44 @@
   </div>
 
   <div>
-    <span class="tag">Behavioral Economics</span>
-    <span class="tag">Reference Dependent Utility</span>
-    <span class="tag">Loss Aversion</span>
-    <span class="tag">AK Growth Model</span>
-    <span class="tag">IFLS Panel Microdata</span>
+    <span class="tag">Constrained Optimization</span>
+    <span class="tag">Loss Function Formulation</span>
+    <span class="tag">Empirical Microdata</span>
+    <span class="tag">High Dimensional Fixed Effects</span>
+    <span class="tag">Non Linear Regression</span>
     <span class="tag">R / Stata</span>
   </div>
 
+  <div class="highlight-card">
+    Applied machine learning and quantitative modeling: Structuring an asymmetric reference dependent objective function, solving for critical bifurcation boundaries, and verifying non linear responses using large scale panel microdata.
+  </div>
+
   <!-- Section 1 -->
-  <h2>The Budget Constraint</h2>
+  <h2>Objective Function and System Constraints</h2>
   <p>
-    Following the work of Ray and Genicot, from a behavioural perspective I am interested in the implications of aspirations on decision making and hence in my simplistic model I take aspirations as a given scalar. I assume each household has current income \(y &gt; 0\). In a single period, the household chooses to allocate income between consumption \(c\) and investment \(k\), which will then yield \(z = f(k)\) in the next period. The budget constraint is given by:
+    In this research, I formulate an optimization problem where agents make dynamic capital allocation decisions subject to forward looking reference targets. Each agent begins with scalar resource endowment \(y &gt; 0\) and allocates it between baseline consumption \(c\) and capital investment \(k\). The production transition kernel is modeled linearly as \(f(k) = \rho k = z\) with productivity parameter \(\rho &gt; 1\). The state budget boundary is defined by:
   </p>
 
   <div class="math-block">
     $$y = c + k, \quad k \ge 0, \quad f'(k) &gt; 0, \quad f''(k) \le 0$$
   </div>
 
-  <!-- Section 2 -->
-  <h2>Aspirations and Preferences</h2>
   <p>
-    Let \(a\) be the target that the household aspires to reach for the next period. We define a reference dependent utility function around \(a\). The utility of the household depends on three things:
+    Preferences are structured using an asymmetric loss function anchored around an exogenous reference target \(a\). The global objective balances immediate utility, future baseline return, and a piecewise penalty reward operator:
   </p>
-  <ul>
-    <li>Current consumption</li>
-    <li>The outcome of the next period \(f(k)\)</li>
-    <li>A gain loss utility term referenced around \(a\) which is my aspirational component that rewards exceeding \(a\) and penalizes falling short of \(a\)</li>
-  </ul>
 
   <div class="math-block">
     $$U(c, k, a) = u(c) + \delta [w_0(f(k)) + \pi_G W_G((f(k) - a)_+) - \pi_L W_L((a - f(k))_+)]$$
   </div>
 
   <p>
-    Here, \(u\), \(w_0\), \(W_G\), and \(W_L\) are all increasing concave functions, \(\delta &gt; 0\) is the weight on how much we value future outcomes today, and \(\pi_G, \pi_L \ge 0\) gives us the strength of gains and the strength of losses where \((x)_+ = \max\{x, 0\}\).
+    Here \(u\), \(w_0\), \(W_G\), and \(W_L\) are concave utility mappings sharing common relative risk aversion elasticity \(\sigma \in (0, 1)\), \(\delta &gt; 0\) represents the intertemporal discount parameter, and \(\pi_L &gt; \pi_G \ge 0\) defines empirical loss aversion where shortfalls are penalized more heavily than gains.
   </p>
 
-  <!-- Section 3 -->
-  <h2>Ratio Normalization (AK, CRRA) and Solution</h2>
+  <!-- Section 2 -->
+  <h2>Scale Normalization and Structural Regimes</h2>
   <p>
-    Since we are interested in studying the effect that aspirations have on investment, similar to Ray and Genicot 2017, I too use the common elasticity growth model from their paper where I start with imposing an AK setting making the production function linear as they argue that this formulation also allows for exogenous labour income in every period. This formulation implies \(f(k) = \rho k = z\) with \(\rho &gt; 1\). This means investing \(k\) yields \(\rho k\) in the next period. Next, I make the following assumptions below such that utilities are constant elasticity with the same elasticity for each of them:
-  </p>
-
-  <div class="math-block">
-    $$u(c) = c^{1-\sigma}, \quad w_0(z) = \delta z^{1-\sigma}, \quad W_G(e) = \delta \pi_G e^{1-\sigma}, \quad W_L(e) = \delta \pi_L e^{1-\sigma}, \quad \sigma \in (0, 1)$$
-  </div>
-
-  <p>
-    Here \(\sigma \in (0, 1)\) is the common curvature. A lower \(\sigma\) would imply more elastic responses. \(\delta &gt; 0\) is the discount weight on next period payoffs as viewed today. \(\pi_G &gt; 0\) is the weight on the additional utility boost we receive from beating our aspiration target and \(\pi_L &gt; 0\) is the negative utility penalty we receive for falling short of our aspiration target. Typically \(\pi_L &gt; \pi_G\) due to loss aversion. \(e \ge 0\) denotes the gap with \(e = (z - a)_+\) and \(e = (a - z)_+\) for the gain and loss respectively and not to forget \((x)_+ = \max\{x, 0\}\).
-  </p>
-  <p>
-    Finally, I define the growth factor given by \(g = z / y\), the aspirations ratio given by \(r = a / y\), and the investment share given by \(i = k / y = g / \rho\). After imposing all these conditions on our utility function for the household, we get the following reduced equation, which is easy to work with:
+    To eliminate scale dependence and allow clean generalization across heterogeneous resource endowments, I normalize the decision variables into scale invariant ratios. I define the growth factor as \(g = z / y\), the reference ratio as \(r = a / y\), and the investment rate as \(i = k / y = g / \rho\). This transforms the problem into maximizing a reduced piecewise objective:
   </p>
 
   <div class="math-block">
@@ -249,192 +249,116 @@
   </div>
 
   <p>
-    In this equation above, once the household chooses an aspiration target \(a\), their aspirations ratio \(r\) is fixed and they choose their level of investment \(z\) to maximize their Utility function through their growth rate \(g\). Since our Utility function is piecewise we can partition it into two zones. I call them the satisfied and frustrated zone based on the level of investment \(z\). The satisfied zone is one where the chosen \(z\) makes \(g \ge r\) and the frustrated zone is one where it makes \(g &lt; r\). This gives rise to two First Order Conditions piecewise in \(g\) and is given by:
+    First order optimization conditions reveal that the agent parameter space partitions into two distinct operating regimes around an optimal bifurcation threshold \(r^* &gt; 1\):
   </p>
-
-  <div class="math-block">
-    $$\text{Satisfied } (g \ge r): \quad \left(1 - \frac{g}{\rho}\right)^{-\sigma} = \delta \rho [g^{-\sigma} + \pi_G (g - r)^{-\sigma}]$$
-    $$\text{Frustrated } (g &lt; r): \quad \left(1 - \frac{g}{\rho}\right)^{-\sigma} = \delta \rho [g^{-\sigma} + \pi_L (r - g)^{-\sigma}]$$
-  </div>
-
+  <ul>
+    <li>
+      <strong>Satisfied Regime \( (g \ge r) \) for \( r \le r^* \):</strong> The target lies within reachable budget bounds. Here the first order condition evaluates along the positive reward domain, yielding a positive gradient \(\partial g^* / \partial r &gt; 0\) where higher aspiration goals incentivize greater capital allocation.
+    </li>
+    <li>
+      <strong>Frustrated Regime \( (g &lt; r) \) for \( r &gt; r^* \):</strong> When the reference target exceeds threshold \(r^*\), attaining it demands unsustainable sacrifice of base consumption. The loss penalty dominates, resulting in a negative gradient \(\partial g^* / \partial r &lt; 0\) where excessive target distance causes an abandonment effect and depresses investment.
+    </li>
+  </ul>
   <p>
-    There exists \(r^* &gt; 1\) such that \(g^*(r)\) solves the satisfied first order condition for \(r &lt; r^*\) and the frustrated first order condition for \(r &gt; r^*\). In the satisfied region, \(\partial g / \partial r\) is positive while in the frustrated region it is negative. Thus \(g^*(r)\) is increasing in \(r\) until \(r^*\) and then decreasing in \(r\) after yielding an inverted U shape. If we look at investment \(k\) keeping income constant, it would yield this inverted U shape too as \(g = z / y\) and \(f(k) = \rho k = z\):
+    Combining both regimes analytically establishes a global inverted U topology for equilibrium investment:
   </p>
 
   <div class="math-block">
     $$k^*(y, a) = \frac{y}{\rho} g^*\left(\frac{a}{y}\right), \quad i^*(r) = \frac{g^*(r)}{\rho}$$
   </div>
 
-  <!-- Section 4 -->
-  <h2>Empirical Results from the IFLS</h2>
+  <!-- Section 3 -->
+  <h2>Empirical Validation and High Dimensional Controls</h2>
   <p>
-    To test the inverted U prediction, I estimated the effect of the aspirations ratio on household educational investments using Indonesian Family Life Survey microdata.
+    I tested whether this non linear optimization pattern holds in real world microdata using \(N = 4{,}651\) longitudinal household records from the Indonesian Family Life Survey. The target metric measures human capital investment, specified as:
   </p>
 
   <div class="math-block">
-    $$\text{Dependent Variable} = 100 \times \log(\text{Education expenditure per capita})$$
+    $$\text{Target Variable} = 100 \times \log(\text{Education expenditure per capita})$$
   </div>
 
+  <p>
+    To evaluate non linearity and prevent spatial confounding from unobserved community infrastructure, I estimated a quadratic polynomial specification combined with high dimensional Kecamatan neighborhood fixed effects and cluster robust standard errors:
+  </p>
+
   <div class="math-block">
-    $$100 \times \log(\text{Education expenditure per capita}_i) = \beta_0 + \beta_1 r_i + \beta_2 r_i^2 + \Gamma X_i + \alpha_{\text{kecamatan}} + \varepsilon_i$$
+    $$\text{Target}_i = \beta_0 + \beta_1 r_i + \beta_2 r_i^2 + \Gamma X_i + \alpha_{\text{kecamatan}} + \varepsilon_i$$
   </div>
 
   <table class="results-table">
     <thead>
       <tr>
-        <th>Variable</th>
-        <th>(1)</th>
-        <th>(2)</th>
-        <th>(3)</th>
+        <th>Predictor Variable</th>
+        <th>Model (1) Baseline</th>
+        <th>Model (2) Demographics</th>
+        <th>Model (3) Full Controls</th>
       </tr>
     </thead>
     <tbody>
       <tr>
-        <td><strong>Aspirations ratio</strong></td>
+        <td><strong>Aspirations ratio (\(r\))</strong></td>
         <td>35.390*** (12.105)</td>
         <td>35.392*** (11.891)</td>
         <td>34.518*** (12.071)</td>
       </tr>
       <tr>
-        <td><strong>(Aspirations ratio)<sup>2</sup></strong></td>
+        <td><strong>Aspirations ratio squared (\(r^2\))</strong></td>
         <td>-3.948** (1.903)</td>
         <td>-4.143** (1.919)</td>
         <td>-4.334** (1.899)</td>
       </tr>
       <tr>
-        <td>Step today = 2</td>
-        <td>16.363 (13.643)</td>
-        <td>9.821 (12.733)</td>
-        <td>1.255 (13.016)</td>
+        <td>Household Asset Controls</td>
+        <td>No</td>
+        <td>Yes</td>
+        <td>Yes</td>
       </tr>
       <tr>
-        <td>Step today = 3</td>
-        <td>47.980*** (13.630)</td>
-        <td>35.564*** (12.614)</td>
-        <td>21.502 (13.071)</td>
-      </tr>
-      <tr>
-        <td>Step today = 4</td>
-        <td>61.910*** (14.433)</td>
-        <td>40.154*** (13.492)</td>
-        <td>22.868* (13.758)</td>
-      </tr>
-      <tr>
-        <td>Step today = 5</td>
-        <td>56.339** (22.057)</td>
-        <td>34.434 (21.060)</td>
-        <td>21.154 (20.953)</td>
-      </tr>
-      <tr>
-        <td>Step today = 6</td>
-        <td>14.633 (49.825)</td>
-        <td>-11.006 (50.233)</td>
-        <td>-27.949 (49.828)</td>
-      </tr>
-      <tr>
-        <td>Assets per capita</td>
-        <td></td>
-        <td>0.000*** (0.000)</td>
-        <td>0.000*** (0.000)</td>
-      </tr>
-      <tr>
-        <td>Dependency ratio</td>
-        <td></td>
-        <td>0.126 (7.128)</td>
-        <td>0.585 (7.114)</td>
-      </tr>
-      <tr>
-        <td>No. of children</td>
-        <td></td>
-        <td>1.058 (4.820)</td>
-        <td>-0.366 (4.662)</td>
-      </tr>
-      <tr>
-        <td>Number of Children aged 6 to 12</td>
-        <td></td>
-        <td>1.561 (5.211)</td>
-        <td>1.893 (5.266)</td>
-      </tr>
-      <tr>
-        <td>Number of Children aged 12 to 18</td>
-        <td></td>
-        <td>11.228*** (3.612)</td>
-        <td>11.073*** (3.541)</td>
-      </tr>
-      <tr>
-        <td>2 parent household dummy</td>
-        <td></td>
-        <td>-4.483 (7.783)</td>
-        <td>-20.098*** (6.826)</td>
-      </tr>
-      <tr>
-        <td>log(Govt. assistance received per child)</td>
-        <td></td>
-        <td>-0.590 (0.393)</td>
-        <td>-0.535 (0.382)</td>
-      </tr>
-      <tr>
-        <td>Age of household head</td>
-        <td></td>
-        <td></td>
-        <td>-0.083 (0.278)</td>
-      </tr>
-      <tr>
-        <td>Years of education of household head</td>
-        <td></td>
-        <td></td>
-        <td>1.084*** (0.373)</td>
-      </tr>
-      <tr>
-        <td>Head marriage status dummy</td>
-        <td></td>
-        <td></td>
-        <td>32.583*** (11.758)</td>
-      </tr>
-      <tr>
-        <td>Urban dummy</td>
-        <td></td>
-        <td></td>
-        <td>38.460*** (5.288)</td>
-      </tr>
-      <tr>
-        <td>Religion of head dummies</td>
+        <td>Parent Education and Demographics</td>
         <td>No</td>
         <td>No</td>
         <td>Yes</td>
       </tr>
       <tr>
-        <td>Ethnicity of head dummies</td>
-        <td>No</td>
-        <td>No</td>
-        <td>Yes</td>
-      </tr>
-      <tr>
-        <td>Kecamatan FE</td>
+        <td>Kecamatan Fixed Effects</td>
         <td>Yes</td>
         <td>Yes</td>
         <td>Yes</td>
       </tr>
       <tr>
-        <td>S.E. Clustered (EA)</td>
-        <td>by: ea id</td>
-        <td>by: ea id</td>
-        <td>by: ea id</td>
+        <td>Standard Error Clustering</td>
+        <td>EA Level</td>
+        <td>EA Level</td>
+        <td>EA Level</td>
       </tr>
       <tr>
-        <td>R<sup>2</sup></td>
-        <td>0.04078</td>
-        <td>0.05940</td>
-        <td>0.08852</td>
-      </tr>
-      <tr>
-        <td>Observations</td>
+        <td>Observations (\(N\))</td>
         <td>4,669</td>
         <td>4,651</td>
         <td>4,651</td>
       </tr>
+      <tr>
+        <td>R squared</td>
+        <td>0.04078</td>
+        <td>0.05940</td>
+        <td>0.08852</td>
+      </tr>
     </tbody>
   </table>
+
+  <!-- Section 4 -->
+  <h2>Machine Learning and Quantitative Insights</h2>
+  <ul>
+    <li>
+      <strong>Statistical Significance:</strong> Across all specifications, the linear coefficient remains positive and significant (\(\beta_1 \approx 34.52\), \(p &lt; 0.01\)) while the quadratic penalty term is negative and significant (\(\beta_2 \approx -4.33\), \(p &lt; 0.05\)), confirming the inverted U curve.
+    </li>
+    <li>
+      <strong>Optimal Threshold Calculation:</strong> Differentiating the response function \(\frac{\partial \text{Target}}{\partial r} = \beta_1 + 2\beta_2 r = 0\) yields the empirical turning point at \(r^* = -\frac{\beta_1}{2\beta_2} \approx 3.98\) to \(4.48\). Targets within this ratio accelerate resource allocation, whereas targets set beyond this boundary trigger motivation breakdown and reduce capital commitments.
+    </li>
+    <li>
+      <strong>Applied Data Science Relevance:</strong> Demonstrates experience in objective formulation, modeling asymmetric loss functions, processing large scale survey tables, and implementing high dimensional fixed effects models relevant to behavioral modeling and predictive underwriting.
+    </li>
+  </ul>
 
   <!-- Download Link -->
   <a href="thesis.pdf" download class="btn-download">&#8595; Download Thesis PDF</a>
