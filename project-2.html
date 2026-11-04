@@ -201,16 +201,16 @@
   <!-- Overview -->
   <h2>Overview</h2>
   <p>
-    Can a computer understand how a person is feeling just by reading a short social media post? In this project, I built an artificial intelligence system designed to read short snippets of text and automatically identify the underlying emotion. Using a popular dataset of tweets and microblogs, the model categorizes text into six core emotions: <em>sadness</em>, <em>joy</em>, <em>love</em>, <em>anger</em>, <em>fear</em>, and <em>surprise</em>. The main challenge was teaching the model to understand the context of words in a sentence without getting overwhelmed or simply memorizing the training examples.
+    This project explores how recurrent neural networks can accurately detect fine-grained emotional states from informal social media text. Using the benchmark <code>dair-ai/emotion</code> corpus, the model classifies short text snippets into six core affective categories: <em>sadness</em>, <em>joy</em>, <em>love</em>, <em>anger</em>, <em>fear</em>, and <em>surprise</em>. The primary engineering goal was to build a robust sequential pipeline that captures bidirectional context, prevents overfitting on noisy data, and maintains high classification performance across distinct emotion classes.
   </p>
 
   <!-- Model Architecture -->
   <h2>System Architecture &amp; Regularization Dynamics</h2>
   <p>
-    To make the text readable for the computer, each tweet was broken down into a standard vocabulary of up to $V = 10{,}000$ common words, trimmed or padded to a uniform length of $L = 50$ words. Words were then translated into numerical vectors ($E \in \mathbb{R}^{V \times 64}$) so the model could recognize relationships between similar concepts.
+    To prepare the text for modeling, raw tweets were mapped to a fixed sub-word vocabulary ($V = 10{,}000$) with uniform truncation and padding to a sequence length of $L = 50$. Words were then projected into a continuous vector space via an embedding matrix $E \in \mathbb{R}^{V \times 64}$ to capture semantic relationships.
   </p>
   <p>
-    To capture the flow and context of a sentence—where words at the end can change the meaning of words at the beginning—I used a two-layer Bidirectional Long Short-Term Memory (BiLSTM) network with hidden cell dimension $d_h = 32$. This network reads sentences both forwards and backwards simultaneously. To prevent the model from cheating by memorizing specific sentences, built-in "dropouts" (randomly turning off 20% of the neural pathways during training) forced the model to learn truly robust patterns:
+    To understand how words interact over time within a sentence, the architecture utilizes a stacked two-layer Bidirectional Long Short-Term Memory (BiLSTM) network with hidden cell dimension $d_h = 32$. By reading the text sequence in both forward and backward directions simultaneously, the network preserves contextual dependencies. To prevent memorization and curb overfitting, dropout regularization ($p = 0.2$) was applied to both the input and recurrent states:
   </p>
 
   <div class="math-block">
@@ -218,7 +218,7 @@
   </div>
 
   <p>
-    Finally, the combined contextual clues were passed through a decision-making layer that weighed the evidence, applied an extra layer of safeguards ($p = 0.3$ dropout) to stay sharp, and used a Softmax function to output the final probability scores across all six emotions:
+    The aggregated sequence representations are then passed through a fully connected projection layer with a ReLU activation, an additional dropout bottleneck ($p = 0.3$) for robust feature selection, and a 6-dimensional Softmax output layer optimized using Sparse Categorical Cross-Entropy:
   </p>
 
   <div class="math-block">
@@ -228,7 +228,7 @@
   <!-- Training Figures -->
   <h2>Empirical Convergence &amp; Validation Trajectory</h2>
   <p>
-    The model learned using the Adam optimization algorithm (with a learning rate of $\alpha = 10^{-3}$ in batches of 32). I used an "early stopping" safety net to automatically halt training the exact moment the model reached its peak performance, preventing it from overthinking and starting to unlearn good habits.
+    The network was trained using the Adam optimizer with a learning rate of $\alpha = 10^{-3}$ and a batch size of 32. To guard against performance degradation from over-training, an early stopping strategy monitored validation loss and restored optimal weights right before the model began to overfit.
   </p>
 
   <div class="figure-container">
@@ -237,13 +237,13 @@
   </div>
 
   <p>
-    As shown above, the model's accuracy on practice data climbed smoothly from 45.7% up to 95.3% by Epoch 6. Meanwhile, error rates on unseen validation checks dropped cleanly and plateaued between 0.321 and 0.327, proving that the model was genuinely learning rather than just memorizing answers.
+    As shown above, training accuracy increased steadily from 45.7% to 95.3% by Epoch 6, while validation loss decreased sharply before stabilizing cleanly around 0.321–0.327 without diverging, confirming that the regularization strategy successfully controlled generalization error.
   </p>
 
   <!-- Performance Metrics -->
   <h2>Test Set Evaluation &amp; Confusion Topology</h2>
   <p>
-    When tested on a completely fresh batch of $N = 2{,}000$ unseen tweets, the model achieved an impressive <strong>Overall Accuracy of 90.45%</strong> with a weighted macro F1-score of 0.90.
+    Evaluated on an independent test split of $N = 2{,}000$ unseen samples, the trained model achieved an overall <strong>Test Accuracy of 90.45%</strong> with a weighted macro F1-score of 0.90.
   </p>
 
   <table class="results-table">
@@ -318,13 +318,13 @@
   <h2>Quantitative Takeaways</h2>
   <ul>
     <li>
-      <strong>Affective Dominance:</strong> The model excelled at picking up clear-cut emotions, scoring a stellar 0.96 F1-score for <em>Sadness</em> and 0.93 for <em>Joy</em>, proving its ability to map sentence structures effectively.
+      <strong>Affective Dominance:</strong> The model demonstrated exceptional class-conditional separation on high-support categories, with <em>Sadness</em> achieving a 0.96 F1-score and <em>Joy</em> reaching 0.93 F1, highlighting the effectiveness of bidirectional phrase modeling.
     </li>
     <li>
-      <strong>Error Distribution:</strong> Where did the model stumble? Mostly on emotions that naturally overlap in human language—for instance, occasionally confusing expressions of <em>Love</em> with general <em>Joy</em>. <em>Surprise</em> was also harder to catch simply because fewer examples existed in the dataset.
+      <strong>Error Distribution:</strong> As reflected in the confusion matrix, performance bottlenecks primarily stem from overlapping semantic spaces—for example, some <em>Love</em> samples bleeding into the broader <em>Joy</em> category—alongside data sparsity impacting recall for underrepresented classes like <em>Surprise</em>.
     </li>
     <li>
-      <strong>Production Scalability:</strong> Unlike massive language models that require immense server power, this compact architecture runs on under 750k parameters. It delivers high-accuracy emotion detection quickly and efficiently, making it ideal for lightweight, real-time apps.
+      <strong>Production Scalability:</strong> By maintaining a compact footprint under 750,000 parameters, the architecture delivers high-fidelity multi-class performance without the heavy computational overhead of multi-billion parameter transformers, making it well-suited for lightweight, real-time inference environments.
     </li>
   </ul>
 
